@@ -30,7 +30,7 @@
     <header class="main-header">
         <div class="container">
             <a href="{{ route('home') }}" class="logo">
-                <span class="logo-icon">Showcase</span> <!-- Placeholder for logo -->
+                <img class="logo-img" src="{{ asset('Images/logo-2ib.png') }}" alt="Logo 2IBSN">
                 <div class="logo-text">
                     <span class="logo-title">2IBSN</span>
                     <span class="logo-subtitle">Institut International Baye Barhamou</span>
