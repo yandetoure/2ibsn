@@ -25,7 +25,7 @@
                     </p>
                 </div>
                 <div class="history-image">
-                    <img src="{{ asset('images/Header.jpeg') }}" alt="Bâtiment de l'Institut 2IBSN">
+                    <img src="{{ asset('Images/Header.jpeg') }}" alt="Bâtiment de l'Institut 2IBSN">
                 </div>
             </div>
 
@@ -60,7 +60,7 @@
                 <div class="director-grid">
                     <div class="director-avatar">
                         <!-- Placeholder for Director's Image or generic avatar -->
-                        <img src="{{ asset('images/avatar.png') }}"
+                        <img src="{{ asset('Images/avatar.png') }}"
                             onerror="this.src='https://ui-avatars.com/api/?name=Madiara+Ndiaye&background=d4af37&color=1a4d2e&size=200'"
                             alt="Le Directeur">
                     </div>

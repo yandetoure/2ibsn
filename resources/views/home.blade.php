@@ -4,10 +4,10 @@
     <section class="hero">
         <div class="carousel-container">
             <!-- Carousel Slides -->
-            <div class="carousel-slide active" style="background-image: url('{{ asset('images/Header.jpeg') }}');"></div>
-            <div class="carousel-slide" style="background-image: url('{{ asset('images/header2.jpeg') }}');"></div>
-            <div class="carousel-slide" style="background-image: url('{{ asset('images/header3.jpeg') }}');"></div>
-            <div class="carousel-slide" style="background-image: url('{{ asset('images/header4.jpeg') }}');"></div>
+            <div class="carousel-slide active" style="background-image: url('{{ asset('Images/Header.jpeg') }}');"></div>
+            <div class="carousel-slide" style="background-image: url('{{ asset('Images/header2.jpeg') }}');"></div>
+            <div class="carousel-slide" style="background-image: url('{{ asset('Images/header3.jpeg') }}');"></div>
+            <div class="carousel-slide" style="background-image: url('{{ asset('Images/header4.jpeg') }}');"></div>
         </div>
         <div class="hero-overlay"></div>
 
@@ -70,7 +70,7 @@
                     <a href="{{ route('about') }}" class="btn">En savoir plus</a>
                 </div>
                 <div class="about-image">
-                    <img src="{{ asset('images/WhatsApp Image 2025-12-05 at 21.16.14.jpeg') }}" alt="Élèves de 2IBSN">
+                    <img src="{{ asset('Images/WhatsApp Image 2025-12-05 at 21.16.14.jpeg') }}" alt="Élèves de 2IBSN">
                 </div>
             </div>
         </div>
@@ -82,42 +82,42 @@
             <div class="gallery-grid">
                 <!-- Using a mix of images for the gallery -->
                 <div class="gallery-item">
-                    <img src="{{ asset('images/WhatsApp Image 2025-12-05 at 21.16.11.jpeg') }}" loading="lazy"
+                    <img src="{{ asset('Images/WhatsApp Image 2025-12-05 at 21.16.11.jpeg') }}" loading="lazy"
                         alt="2IBSN Gallery">
                     <div class="gallery-overlay"><span class="gallery-icon">+</span></div>
                 </div>
                 <div class="gallery-item">
-                    <img src="{{ asset('images/WhatsApp Image 2025-12-05 at 21.16.12.jpeg') }}" loading="lazy"
+                    <img src="{{ asset('Images/WhatsApp Image 2025-12-05 at 21.16.12.jpeg') }}" loading="lazy"
                         alt="2IBSN Gallery">
                     <div class="gallery-overlay"><span class="gallery-icon">+</span></div>
                 </div>
                 <div class="gallery-item">
-                    <img src="{{ asset('images/WhatsApp Image 2025-12-05 at 21.16.13.jpeg') }}" loading="lazy"
+                    <img src="{{ asset('Images/WhatsApp Image 2025-12-05 at 21.16.13.jpeg') }}" loading="lazy"
                         alt="2IBSN Gallery">
                     <div class="gallery-overlay"><span class="gallery-icon">+</span></div>
                 </div>
                 <div class="gallery-item">
-                    <img src="{{ asset('images/WhatsApp Image 2025-12-05 at 21.16.15.jpeg') }}" loading="lazy"
+                    <img src="{{ asset('Images/WhatsApp Image 2025-12-05 at 21.16.15.jpeg') }}" loading="lazy"
                         alt="2IBSN Gallery">
                     <div class="gallery-overlay"><span class="gallery-icon">+</span></div>
                 </div>
                 <div class="gallery-item">
-                    <img src="{{ asset('images/WhatsApp Image 2025-12-05 at 21.16.16.jpeg') }}" loading="lazy"
+                    <img src="{{ asset('Images/WhatsApp Image 2025-12-05 at 21.16.16.jpeg') }}" loading="lazy"
                         alt="2IBSN Gallery">
                     <div class="gallery-overlay"><span class="gallery-icon">+</span></div>
                 </div>
                 <div class="gallery-item">
-                    <img src="{{ asset('images/WhatsApp Image 2025-12-05 at 21.16.17.jpeg') }}" loading="lazy"
+                    <img src="{{ asset('Images/WhatsApp Image 2025-12-05 at 21.16.17.jpeg') }}" loading="lazy"
                         alt="2IBSN Gallery">
                     <div class="gallery-overlay"><span class="gallery-icon">+</span></div>
                 </div>
                 <div class="gallery-item">
-                    <img src="{{ asset('images/WhatsApp Image 2025-12-05 at 21.16.18.jpeg') }}" loading="lazy"
+                    <img src="{{ asset('Images/WhatsApp Image 2025-12-05 at 21.16.18.jpeg') }}" loading="lazy"
                         alt="2IBSN Gallery">
                     <div class="gallery-overlay"><span class="gallery-icon">+</span></div>
                 </div>
                 <div class="gallery-item">
-                    <img src="{{ asset('images/WhatsApp Image 2025-12-05 at 21.16.19.jpeg') }}" loading="lazy"
+                    <img src="{{ asset('Images/WhatsApp Image 2025-12-05 at 21.16.19.jpeg') }}" loading="lazy"
                         alt="2IBSN Gallery">
                     <div class="gallery-overlay"><span class="gallery-icon">+</span></div>
                 </div>
