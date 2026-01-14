@@ -84,13 +84,6 @@ ul {
     gap: 1rem;
 }
 
-.logo-img {
-    height: 60px;
-    width: auto;
-    object-fit: contain;
-    display: block;
-}
-
 .logo-text {
     display: flex;
     flex-direction: column;
@@ -109,6 +102,12 @@ ul {
     color: var(--text-light);
     text-transform: uppercase;
     letter-spacing: 0.5px;
+}
+
+.logo-img {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
 }
 
 .nav-list {
@@ -316,6 +315,14 @@ ul {
     color: var(--secondary);
     margin-bottom: 1.5rem;
     font-size: 1.25rem;
+}
+
+.footer-logo {
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 1.5rem;
+    filter: brightness(0) invert(1);
 }
 
 .footer-col ul li {
