@@ -8,7 +8,7 @@
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
         <h2>Paiement #{{ $payment->id }}</h2>
         <div style="display: flex; gap: 0.5rem;">
-            <a href="{{ route('admin.payments.receipt.generate', $payment) }}" class="btn btn-success">Générer Reçu</a>
+            <a href="{{ route('admin.payments.receipt', $payment) }}" class="btn btn-success">Générer Reçu</a>
             <a href="{{ route('admin.payments.receipt.download', $payment) }}" class="btn btn-primary">Télécharger Reçu</a>
             <a href="{{ route('admin.payments.edit', $payment) }}" class="btn btn-secondary">Modifier</a>
             <a href="{{ route('admin.payments.index') }}" class="btn btn-secondary">Retour</a>

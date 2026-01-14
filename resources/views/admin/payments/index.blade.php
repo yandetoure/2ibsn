@@ -70,7 +70,7 @@
                     </td>
                     <td>
                         <a href="{{ route('admin.payments.show', $payment) }}" class="btn btn-primary" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">Voir</a>
-                        <a href="{{ route('admin.payments.receipt.generate', $payment) }}" class="btn btn-success" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">Reçu</a>
+                        <a href="{{ route('admin.payments.receipt', $payment) }}" class="btn btn-success" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">Reçu</a>
                         <a href="{{ route('admin.payments.edit', $payment) }}" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">Modifier</a>
                     </td>
                 </tr>

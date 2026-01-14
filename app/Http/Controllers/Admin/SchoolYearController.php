@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class SchoolYearController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-
     public function index()
     {
         $schoolYears = SchoolYear::orderBy('start_date', 'desc')->paginate(15);

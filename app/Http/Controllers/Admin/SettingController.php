@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-
     public function index()
     {
         $settings = Setting::orderBy('group')->orderBy('key')->get()->groupBy('group');

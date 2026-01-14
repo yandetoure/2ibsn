@@ -9,11 +9,6 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-
     public function index(Request $request)
     {
         $query = Student::with('level');

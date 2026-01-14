@@ -15,11 +15,6 @@ use Illuminate\Support\Facades\Validator;
 
 class ImportExportController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-
     public function exportStudents(Request $request)
     {
         $query = Student::with(['level']);

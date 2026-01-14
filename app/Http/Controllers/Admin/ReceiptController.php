@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ReceiptController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-
     public function generate(Payment $payment)
     {
         $payment->load(['student', 'enrollment.level']);

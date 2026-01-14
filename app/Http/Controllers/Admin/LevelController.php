@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class LevelController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-
     public function index()
     {
         $levels = Level::latest()->paginate(15);

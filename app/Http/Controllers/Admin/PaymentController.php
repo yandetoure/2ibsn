@@ -10,11 +10,6 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-
     public function index(Request $request)
     {
         $query = Payment::with(['student', 'enrollment']);
