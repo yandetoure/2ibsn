@@ -26,7 +26,12 @@
             <div class="form-group">
                 <label for="enrollment_id">Inscription (optionnel)</label>
                 <select id="enrollment_id" name="enrollment_id">
-                    <option value="">Aucune</option>
+                    <option value="">Aucune (sera trouvée automatiquement)</option>
+                    @foreach($enrollments as $enrollment)
+                        <option value="{{ $enrollment->id }}" data-student-id="{{ $enrollment->student_id }}">
+                            {{ $enrollment->student->full_name }} - {{ $enrollment->level->name }} ({{ $enrollment->enrollment_date->format('d/m/Y') }})
+                        </option>
+                    @endforeach
                 </select>
                 @error('enrollment_id')<span class="error">{{ $message }}</span>@enderror
             </div>
@@ -75,4 +80,38 @@
     display: block;
 }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const studentSelect = document.getElementById('student_id');
+    const enrollmentSelect = document.getElementById('enrollment_id');
+    
+    studentSelect.addEventListener('change', function() {
+        const studentId = this.value;
+        const options = enrollmentSelect.querySelectorAll('option');
+        
+        // Afficher toutes les options
+        options.forEach(option => {
+            option.style.display = '';
+        });
+        
+        // Si un élève est sélectionné, filtrer les inscriptions
+        if (studentId) {
+            options.forEach(option => {
+                if (option.value && option.dataset.studentId !== studentId) {
+                    option.style.display = 'none';
+                }
+            });
+            
+            // Sélectionner automatiquement l'inscription active de l'élève si disponible
+            const activeEnrollment = Array.from(options).find(option => 
+                option.dataset.studentId === studentId && option.value
+            );
+            if (activeEnrollment) {
+                enrollmentSelect.value = activeEnrollment.value;
+            }
+        }
+    });
+});
+</script>
 @endsection

@@ -41,8 +41,9 @@ class PaymentController extends Controller
 
     public function create()
     {
-        $students = Student::where('status', 'active')->with('currentEnrollment')->get();
-        return view('admin.payments.create', compact('students'));
+        $students = Student::where('status', 'active')->with(['currentEnrollment', 'enrollments'])->get();
+        $enrollments = Enrollment::where('status', 'active')->with(['student', 'level'])->get();
+        return view('admin.payments.create', compact('students', 'enrollments'));
     }
 
     public function store(Request $request)
@@ -57,6 +58,15 @@ class PaymentController extends Controller
         ]);
 
         $validated['status'] = 'completed';
+
+        // Si pas d'enrollment fourni, chercher l'enrollment active de l'élève
+        if (empty($validated['enrollment_id'])) {
+            $student = Student::find($validated['student_id']);
+            $currentEnrollment = $student->currentEnrollment;
+            if ($currentEnrollment) {
+                $validated['enrollment_id'] = $currentEnrollment->id;
+            }
+        }
 
         $payment = Payment::create($validated);
 

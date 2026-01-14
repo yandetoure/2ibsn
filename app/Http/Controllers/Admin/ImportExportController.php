@@ -135,12 +135,34 @@ class ImportExportController extends Controller
                 $key = $headerMap[$col];
                 $value = trim($row[$index] ?? '');
                 
-                if ($key == 'level_id' && !is_numeric($value)) {
+                // Conversion des dates (format dd/mm/yyyy ou yyyy-mm-dd)
+                if (in_array($key, ['birth_date', 'entry_date']) && $value) {
+                    if (strpos($value, '/') !== false) {
+                        // Format dd/mm/yyyy
+                        $parts = explode('/', $value);
+                        if (count($parts) == 3) {
+                            $value = $parts[2] . '-' . $parts[1] . '-' . $parts[0];
+                        }
+                    }
+                }
+                
+                // Conversion du niveau
+                if ($key == 'level_id' && !is_numeric($value) && $value) {
                     $level = Level::where('name', 'like', "%{$value}%")->orWhere('code', $value)->first();
                     $value = $level ? $level->id : null;
                 }
                 
-                $mapped[$key] = $value;
+                // Conversion du sexe
+                if ($key == 'gender' && $value) {
+                    $value = strtoupper(substr($value, 0, 1));
+                    if (!in_array($value, ['M', 'F'])) {
+                        $value = null;
+                    }
+                }
+                
+                if ($value) {
+                    $mapped[$key] = $value;
+                }
             }
         }
 
