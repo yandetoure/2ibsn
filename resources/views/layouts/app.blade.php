@@ -30,7 +30,7 @@
     <header class="main-header">
         <div class="container">
             <a href="{{ route('home') }}" class="logo">
-                <img src="{{ asset('Images/logo.png') }}" alt="2IBSN Logo" class="logo-img">
+                <img src="{{ asset('Images/logo.png') }}" alt="2IBSN Logo" class="logo-img" loading="eager" width="60" height="60">
                 <div class="logo-text">
                     <span class="logo-title">2ibsn</span>
                     <span class="logo-subtitle">Institut International Baye Barhamou</span>
@@ -61,7 +61,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <img src="{{ asset('Images/logo2.png') }}" alt="2IBSN Logo" class="footer-logo">
+                    <img src="{{ asset('Images/logo2.png') }}" alt="2IBSN Logo" class="footer-logo" loading="lazy" width="80" height="80">
                     <p>Un établissement d'excellence alliant savoir universel et valeurs islamiques.</p>
                 </div>
                 <div class="footer-col">
