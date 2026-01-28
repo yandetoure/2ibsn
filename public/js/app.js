@@ -5,20 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (menuToggle && navList) {
         menuToggle.addEventListener('click', () => {
-            const isVisible = navList.style.display === 'flex';
-            if (isVisible) {
-                navList.style.display = 'none';
-            } else {
-                navList.style.display = 'flex';
-                navList.style.flexDirection = 'column';
-                navList.style.position = 'absolute';
-                navList.style.top = '100%';
-                navList.style.left = '0';
-                navList.style.width = '100%';
-                navList.style.background = 'white';
-                navList.style.padding = '1rem';
-                navList.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1)';
-            }
+            menuToggle.classList.toggle('active');
+            navList.classList.toggle('active');
+            document.body.style.overflow = navList.classList.contains('active') ? 'hidden' : '';
         });
     }
 
