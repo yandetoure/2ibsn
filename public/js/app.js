@@ -21,9 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-
-    // ... existing code ...
-
     // Hero Carousel Logic
     const slides = document.querySelectorAll('.carousel-slide');
     const indicators = document.querySelectorAll('.indicator');
@@ -75,29 +72,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Scroll Animation Observer (Optional Polish)
+    // Scroll Animation Observer
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+                entry.target.classList.add('animated');
             }
         });
-    }, { threshold: 0.1 });
+    }, observerOptions);
 
-    document.querySelectorAll('.value-card, .program-card, .gallery-item').forEach(el => {
+    document.querySelectorAll('[data-animate]').forEach(el => {
         observer.observe(el);
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     });
 
-    // Add visible class styling dynamically
-    const style = document.createElement('style');
-    style.innerHTML = `
-        .visible {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
+    // Sticky Header Effect
+    const header = document.querySelector('.main-header');
+    const handleScroll = () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
         }
-    `;
-    document.head.appendChild(style);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); 
 });
