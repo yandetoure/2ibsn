@@ -24,82 +24,133 @@
 <body class="bg-[#f7f5f0] font-sans antialiased text-gray-800">
 
     {{-- ════════════════════ HEADER ════════════════════ --}}
-    <header id="main-header" class="main-header fixed w-full top-0 z-[1000] transition-all duration-500 bg-white/95 backdrop-blur-xl border-b border-black/[0.04]">
-        <div class="container">
-            <div id="nav-container" class="nav-container flex items-center justify-between h-20 transition-all duration-300">
+    <header id="main-header" class="main-header fixed w-full top-0 z-[1000] transition-all duration-500">
+        {{-- Inner wrapper: transparent on hero pages, solid otherwise --}}
+        <div class="nav-inner transition-all duration-500">
+            <div class="container">
+                <div id="nav-container" class="flex items-center justify-between h-20 lg:h-22 transition-all duration-300">
 
-                {{-- Logo --}}
-                <a href="{{ route('home') }}" class="flex items-center gap-3 shrink-0">
-                    @if($logo = App\Models\Setting::get('logo_image'))
-                        <img src="{{ asset('storage/' . $logo) }}" alt="2IBSN Logo" class="h-12 w-auto object-contain" loading="eager">
-                    @else
-                        <img src="{{ asset('Images/logo.png') }}" alt="2IBSN Logo" class="h-12 w-auto object-contain" loading="eager">
-                    @endif
-                    <div class="flex flex-col leading-none">
-                        <span class="font-serif text-xl font-bold text-primary tracking-tight">{{ App\Models\Setting::get('institute_name', '2IBSN') }}</span>
-                        <span class="hidden sm:block text-[9px] text-gray-400 uppercase tracking-[2px] mt-0.5">Institut International Baye Barhamou</span>
-                    </div>
-                </a>
+                    {{-- Logo --}}
+                    <a href="{{ route('home') }}" class="flex items-center gap-3 shrink-0 group">
+                        @if($logo = App\Models\Setting::get('logo_image'))
+                            <img src="{{ asset('storage/' . $logo) }}" alt="2IBSN Logo" class="logo-img h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105" loading="eager">
+                        @else
+                            <img src="{{ asset('Images/logo.png') }}" alt="2IBSN Logo" class="logo-img h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105" loading="eager">
+                        @endif
+                        <div class="flex flex-col leading-none">
+                            <span id="logo-name" class="font-serif text-xl font-bold tracking-tight transition-colors duration-300">{{ App\Models\Setting::get('institute_name', '2IBSN') }}</span>
+                            <span id="logo-sub" class="hidden sm:block text-[9px] uppercase tracking-[2px] mt-0.5 transition-colors duration-300">Institut Baye Barhamou</span>
+                        </div>
+                    </a>
 
-                {{-- Desktop Nav --}}
-                <nav class="hidden lg:flex items-center gap-8">
-                    <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">Accueil</a>
-                    <a href="{{ route('about') }}" class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}">À propos</a>
-                    <a href="{{ route('programs') }}" class="nav-link {{ request()->routeIs('programs') ? 'active' : '' }}">Programmes</a>
-                    <a href="{{ route('admissions') }}" class="nav-link {{ request()->routeIs('admissions') ? 'active' : '' }}">Admissions</a>
-                    <a href="{{ route('contact') }}" class="btn-primary">Nous contacter</a>
-                </nav>
+                    {{-- Desktop Nav --}}
+                    <nav class="hidden lg:flex items-center gap-1">
+                        @foreach([
+                            ['home',       'Accueil'],
+                            ['about',      'À propos'],
+                            ['programs',   'Programmes'],
+                            ['admissions', 'Admissions'],
+                        ] as [$route, $label])
+                        <a href="{{ route($route) }}"
+                           class="nav-pill px-4 py-2 rounded-full text-sm font-medium transition-all duration-200
+                                  {{ request()->routeIs($route)
+                                     ? 'bg-primary text-white shadow-sm'
+                                     : 'hover:bg-black/5' }}">
+                            {{ $label }}
+                        </a>
+                        @endforeach
 
-                {{-- Hamburger --}}
-                <button id="hamburger" class="lg:hidden flex flex-col justify-center gap-[6px] w-8 h-8 cursor-pointer bg-transparent border-0 p-0" aria-label="Menu">
-                    <span class="block h-0.5 w-6 bg-primary rounded-full transition-all duration-300 origin-center"></span>
-                    <span class="block h-0.5 w-6 bg-primary rounded-full transition-all duration-300"></span>
-                    <span class="block h-0.5 w-6 bg-primary rounded-full transition-all duration-300 origin-center"></span>
-                </button>
+                        <a href="{{ route('contact') }}"
+                           class="ml-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold
+                                  bg-secondary text-primary-dark uppercase tracking-wider
+                                  transition-all duration-200 hover:bg-secondary-light hover:-translate-y-0.5
+                                  hover:shadow-[0_6px_20px_rgba(212,175,55,0.35)]">
+                            <i class="fas fa-envelope text-xs"></i> Contact
+                        </a>
+                    </nav>
+
+                    {{-- Hamburger --}}
+                    <button id="hamburger"
+                            class="lg:hidden relative w-10 h-10 rounded-xl flex flex-col items-center justify-center gap-[5px] cursor-pointer border-0 bg-transparent"
+                            aria-label="Menu">
+                        <span class="hamburger-line block h-[2px] w-5 rounded-full transition-all duration-300 origin-center"></span>
+                        <span class="hamburger-line block h-[2px] w-5 rounded-full transition-all duration-300"></span>
+                        <span class="hamburger-line block h-[2px] w-3 rounded-full transition-all duration-300 origin-center self-end"></span>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
 
     {{-- ════════════ MOBILE NAV ════════════ --}}
-    <div id="mobile-nav" class="fixed top-0 right-0 h-screen w-full max-w-sm bg-primary z-[999] flex flex-col lg:hidden shadow-2xl">
-        {{-- Close bar --}}
-        <div class="flex items-center justify-between px-6 h-20 border-b border-white/10">
-            <span class="font-serif text-xl font-bold text-white">Menu</span>
-            <button id="mobile-close" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white" aria-label="Fermer">
-                <i class="fas fa-times"></i>
+    <div id="mobile-nav" class="fixed top-0 right-0 h-screen w-full max-w-[320px] z-[999] flex flex-col lg:hidden overflow-hidden"
+         style="background: linear-gradient(160deg, #1a4d2e 0%, #0f3320 100%);">
+
+        {{-- Decorative blob --}}
+        <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full opacity-10 pointer-events-none"
+             style="background: radial-gradient(circle, #d4af37 0%, transparent 70%);"></div>
+
+        {{-- Header --}}
+        <div class="relative flex items-center justify-between px-6 h-20 border-b border-white/10 z-10">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-secondary/20 flex items-center justify-center">
+                    <i class="fas fa-graduation-cap text-secondary text-xs"></i>
+                </div>
+                <span class="font-serif text-white font-bold text-lg">2IBSN</span>
+            </div>
+            <button id="mobile-close"
+                    class="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                    aria-label="Fermer">
+                <i class="fas fa-times text-sm"></i>
             </button>
         </div>
-        {{-- Links --}}
-        <nav class="flex flex-col px-6 py-8 gap-2 flex-1">
+
+        {{-- Nav links --}}
+        <nav class="flex flex-col px-4 py-6 gap-1 flex-1 relative z-10">
             @foreach([
-                ['home',       'Accueil',    'fas fa-home'],
-                ['about',      'À propos',   'fas fa-university'],
-                ['programs',   'Programmes', 'fas fa-book-open'],
-                ['admissions', 'Admissions', 'fas fa-file-alt'],
-                ['contact',    'Contact',    'fas fa-envelope'],
-            ] as [$route, $label, $icon])
+                ['home',       'Accueil',     'fas fa-home',            '1'],
+                ['about',      'À propos',    'fas fa-university',      '2'],
+                ['programs',   'Programmes',  'fas fa-book-open',       '3'],
+                ['admissions', 'Admissions',  'fas fa-file-signature',  '4'],
+                ['contact',    'Contact',     'fas fa-envelope',        '5'],
+            ] as [$route, $label, $icon, $num])
+            @php $isActive = request()->routeIs($route); @endphp
             <a href="{{ route($route) }}"
-               class="flex items-center gap-4 px-4 py-3.5 rounded-2xl font-medium transition-all duration-200
-                       {{ request()->routeIs($route) ? 'bg-secondary text-primary-dark' : 'text-white/80 hover:bg-white/10 hover:text-white' }}">
-                <i class="{{ $icon }} w-5 text-center"></i>
-                {{ $label }}
+               class="group flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-200
+                       {{ $isActive
+                          ? 'bg-secondary text-primary-dark font-semibold'
+                          : 'text-white/75 hover:bg-white/8 hover:text-white' }}">
+                <div class="w-9 h-9 rounded-xl flex items-center justify-center text-sm shrink-0 transition-all
+                            {{ $isActive ? 'bg-primary-dark/20' : 'bg-white/5 group-hover:bg-white/10' }}">
+                    <i class="{{ $icon }}"></i>
+                </div>
+                <span class="text-sm font-medium">{{ $label }}</span>
+                @if($isActive)
+                <i class="fas fa-chevron-right text-[10px] ml-auto opacity-60"></i>
+                @endif
             </a>
             @endforeach
         </nav>
-        {{-- Contact quick --}}
-        <div class="px-6 pb-8 space-y-3">
-            <div class="flex items-center gap-3 text-white/60 text-sm">
-                <i class="fas fa-phone text-secondary"></i>
-                <span>+221 77 375 07 24</span>
-            </div>
-            <div class="flex items-center gap-3 text-white/60 text-sm">
-                <i class="fas fa-envelope text-secondary"></i>
-                <span>contact@2ibsn.edu.sn</span>
-            </div>
+
+        {{-- Footer info --}}
+        <div class="relative z-10 px-6 py-6 border-t border-white/10 space-y-3">
+            <a href="tel:+221773750724" class="flex items-center gap-3 text-white/60 hover:text-secondary transition-colors text-sm">
+                <div class="w-7 h-7 rounded-lg bg-secondary/10 flex items-center justify-center shrink-0">
+                    <i class="fas fa-phone text-secondary text-xs"></i>
+                </div>
+                +221 77 375 07 24
+            </a>
+            <a href="https://wa.me/221773750724" target="_blank"
+               class="flex items-center gap-3 text-white/60 hover:text-green-400 transition-colors text-sm">
+                <div class="w-7 h-7 rounded-lg bg-green-500/10 flex items-center justify-center shrink-0">
+                    <i class="fab fa-whatsapp text-green-400 text-xs"></i>
+                </div>
+                WhatsApp direct
+            </a>
         </div>
     </div>
-    {{-- Mobile overlay --}}
-    <div id="mobile-overlay" class="fixed inset-0 bg-black/50 z-[998] hidden lg:hidden" aria-hidden="true"></div>
+    {{-- Overlay --}}
+    <div id="mobile-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[998] hidden lg:hidden" aria-hidden="true"></div>
 
     {{-- ════════════════════ MAIN ════════════════════ --}}
     <main class="pt-20">
@@ -211,11 +262,19 @@
     {{-- ════════════ JS ════════════ --}}
     <script>
     (function () {
-        // Header scroll
-        const header = document.getElementById('main-header');
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('scrolled', window.scrollY > 50);
-        }, { passive: true });
+        const header  = document.getElementById('main-header');
+        const isHome  = document.querySelector('.carousel-container') !== null;
+
+        // Transparent header on home hero top
+        function updateHeader() {
+            const scrolled = window.scrollY > 60;
+            header.classList.toggle('scrolled',  scrolled);
+            if (isHome) {
+                header.classList.toggle('hero-top', !scrolled);
+            }
+        }
+        updateHeader();
+        window.addEventListener('scroll', updateHeader, { passive: true });
 
         // Mobile menu
         const hamburger   = document.getElementById('hamburger');
@@ -239,6 +298,9 @@
         mobileClose?.addEventListener('click', closeMenu);
         overlay?.addEventListener('click', closeMenu);
 
+        // Close on nav link click (mobile)
+        document.querySelectorAll('#mobile-nav a').forEach(a => a.addEventListener('click', closeMenu));
+
         // Scroll animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(e => {
@@ -247,18 +309,17 @@
                     observer.unobserve(e.target);
                 }
             });
-        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
 
-        document.querySelectorAll('[data-animate]').forEach((el, i) => {
-            // Stagger children in the same parent
+        document.querySelectorAll('[data-animate]').forEach(el => {
             const siblings = [...el.parentElement.querySelectorAll('[data-animate]')];
             const idx = siblings.indexOf(el);
-            if (idx > 0) el.style.transitionDelay = (idx * 100) + 'ms';
+            if (idx > 0) el.style.transitionDelay = (idx * 90) + 'ms';
             observer.observe(el);
         });
 
         // Carousel
-        const slides = document.querySelectorAll('.carousel-slide');
+        const slides     = document.querySelectorAll('.carousel-slide');
         const indicators = document.querySelectorAll('.carousel-indicator');
         let current = 0, timer;
 
@@ -269,11 +330,11 @@
             slides[current]?.classList.add('active');
             indicators[current]?.classList.add('!bg-secondary', '!w-6');
         }
-        function start() { timer = setInterval(() => goTo(current + 1), 5000); }
-        function reset()  { clearInterval(timer); start(); }
+        function startCarousel() { timer = setInterval(() => goTo(current + 1), 5000); }
+        function resetCarousel() { clearInterval(timer); startCarousel(); }
 
-        indicators.forEach((dot, i) => dot.addEventListener('click', () => { goTo(i); reset(); }));
-        if (slides.length > 1) start();
+        indicators.forEach((dot, i) => dot.addEventListener('click', () => { goTo(i); resetCarousel(); }));
+        if (slides.length > 1) startCarousel();
 
         // Animated counters
         document.querySelectorAll('[data-count]').forEach(el => {
@@ -281,12 +342,12 @@
             const suffix = el.dataset.suffix || '';
             const obs = new IntersectionObserver(([e]) => {
                 if (!e.isIntersecting) return;
-                let start = 0;
-                const step = target / 60;
+                let val = 0;
+                const step = target / 55;
                 const tick = () => {
-                    start = Math.min(start + step, target);
-                    el.textContent = Math.floor(start) + suffix;
-                    if (start < target) requestAnimationFrame(tick);
+                    val = Math.min(val + step, target);
+                    el.textContent = Math.floor(val) + suffix;
+                    if (val < target) requestAnimationFrame(tick);
                 };
                 requestAnimationFrame(tick);
                 obs.disconnect();
