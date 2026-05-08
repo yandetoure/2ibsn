@@ -197,6 +197,8 @@
 .main-header.hero-top #logo-name       { color: #fff; }
 .main-header.hero-top #logo-sub        { color: rgba(255,255,255,0.55); }
 .main-header.hero-top .hamburger-line  { background: #fff; }
+.main-header.hero-top #hamburger       { background: rgba(255,255,255,0.1); backdrop-filter: blur(8px); }
+.main-header.hero-top #hamburger:hover { background: rgba(255,255,255,0.2); }
 
 /* Scrolled: tighter + shadow */
 .main-header.scrolled {
@@ -259,7 +261,7 @@
 /* ─── Hamburger toggle ──────────────────────────────────── */
 #hamburger.open .hamburger-line:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
-    width: 20px;
+    width: 24px;
 }
 #hamburger.open .hamburger-line:nth-child(2) {
     opacity: 0;
@@ -267,6 +269,7 @@
 }
 #hamburger.open .hamburger-line:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
-    width: 20px;
+    width: 24px;
     align-self: unset;
+    margin-right: 0;
 }

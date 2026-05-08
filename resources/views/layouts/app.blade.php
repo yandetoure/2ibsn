@@ -37,7 +37,7 @@
                         @else
                             <img src="{{ asset('Images/logo.png') }}" alt="2IBSN Logo" class="logo-img h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105" loading="eager">
                         @endif
-                        <div class="flex flex-col leading-none">
+                        <div class="hidden sm:flex flex-col leading-none">
                             <span id="logo-name" class="font-serif text-xl font-bold tracking-tight transition-colors duration-300">{{ App\Models\Setting::get('institute_name', '2IBSN') }}</span>
                             <span id="logo-sub" class="hidden sm:block text-[9px] uppercase tracking-[2px] mt-0.5 transition-colors duration-300">Institut Baye Barhamou</span>
                         </div>
@@ -71,11 +71,11 @@
 
                     {{-- Hamburger --}}
                     <button id="hamburger"
-                            class="lg:hidden relative w-10 h-10 rounded-xl flex flex-col items-center justify-center gap-[5px] cursor-pointer border-0 bg-transparent"
+                            class="lg:hidden relative w-12 h-12 rounded-2xl flex flex-col items-center justify-center gap-[5px] cursor-pointer border-0 bg-black/5 hover:bg-black/10 transition-all duration-300 active:scale-95"
                             aria-label="Menu">
-                        <span class="hamburger-line block h-[2px] w-5 rounded-full transition-all duration-300 origin-center"></span>
-                        <span class="hamburger-line block h-[2px] w-5 rounded-full transition-all duration-300"></span>
-                        <span class="hamburger-line block h-[2px] w-3 rounded-full transition-all duration-300 origin-center self-end"></span>
+                        <span class="hamburger-line block h-[2px] w-6 rounded-full transition-all duration-300 origin-center"></span>
+                        <span class="hamburger-line block h-[2px] w-6 rounded-full transition-all duration-300"></span>
+                        <span class="hamburger-line block h-[2px] w-4 rounded-full transition-all duration-300 origin-center self-end mr-3"></span>
                     </button>
                 </div>
             </div>
