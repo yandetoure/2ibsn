@@ -314,8 +314,8 @@
 
         @php
         $galleryImages = [
-            'WhatsApp Image 2025-12-05 at 21.16.11.jpeg',
-            'WhatsApp Image 2025-12-05 at 21.16.12.jpeg',
+            'WhatsApp Image 2025-12-05 at 21.16.18 (2).jpeg',
+            'WhatsApp Image 2025-12-05 at 21.16.17 (2).jpeg',
             'WhatsApp Image 2025-12-05 at 21.16.13.jpeg',
             'WhatsApp Image 2025-12-05 at 21.16.15.jpeg',
             'WhatsApp Image 2025-12-05 at 21.16.16.jpeg',
