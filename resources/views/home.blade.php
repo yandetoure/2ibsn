@@ -46,15 +46,15 @@
 
             {{-- Headline --}}
             <h1 class="font-serif font-bold leading-[1.1] mb-6" data-animate="fade-up">
-                <span class="block text-4xl sm:text-5xl lg:text-7xl text-white">Éducation d'Excellence</span>
-                <span class="block text-4xl sm:text-5xl lg:text-7xl mt-1"
+                <span class="block text-2xl sm:text-3xl lg:text-5xl text-white">Éducation d'Excellence</span>
+                <span class="block text-2xl sm:text-3xl lg:text-5xl mt-1"
                       style="background:linear-gradient(135deg,#d4af37,#f3cf55,#d4af37);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
                     &amp; Valeurs Islamiques
                 </span>
             </h1>
 
             {{-- Sub --}}
-            <p class="text-base sm:text-lg text-white/75 leading-relaxed max-w-xl mx-auto mb-10" data-animate="fade-up">
+            <p class="text-[13px] sm:text-sm text-white/75 leading-relaxed max-w-xl mx-auto mb-10" data-animate="fade-up">
                 L'Institut International Baye Barhamou forme les leaders de demain à travers un cursus franco-islamique unique, de la maternelle au collège.
             </p>
 
@@ -126,11 +126,11 @@
                 <div class="w-14 h-14 rounded-2xl {{ $bg }} flex items-center justify-center text-2xl mb-6 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
                     {{ $emoji }}
                 </div>
-                <h3 class="font-serif font-bold text-xl text-gray-900 mb-3">{{ $title }}</h3>
-                <p class="text-gray-500 text-sm leading-relaxed">{{ $desc }}</p>
-                <div class="mt-6 flex items-center gap-2 text-xs font-semibold {{ $color }} opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-serif font-bold text-lg text-gray-900 mb-3">{{ $title }}</h3>
+                <p class="text-gray-500 text-xs leading-relaxed">{{ $desc }}</p>
+                <div class="mt-6 flex items-center gap-2 text-[10px] font-semibold {{ $color }} opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <span>En savoir plus</span>
-                    <i class="fas fa-arrow-right text-[10px]"></i>
+                    <i class="fas fa-arrow-right text-[9px]"></i>
                 </div>
             </div>
             @endforeach
@@ -167,10 +167,10 @@
                 <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-secondary/10 border border-secondary/20 mb-4">
                     <i class="{{ $icon }} text-secondary text-base"></i>
                 </div>
-                <div class="font-serif font-bold text-4xl sm:text-5xl text-secondary mb-2">
+                <div class="font-serif font-bold text-4xl sm:text-4xl text-secondary mb-2">
                     <span data-count="{{ $num }}" data-suffix="{{ $suffix }}">0{{ $suffix }}</span>
                 </div>
-                <p class="text-white/55 text-xs uppercase tracking-[2px]">{{ $label }}</p>
+                <p class="text-white/55 text-[10px] uppercase tracking-[2px]">{{ $label }}</p>
             </div>
             @endforeach
         </div>
@@ -204,8 +204,8 @@
                             <i class="fas fa-star text-secondary"></i>
                         </div>
                         <div>
-                            <div class="font-bold text-gray-900 text-sm">Fondé en 2016</div>
-                            <div class="text-gray-400 text-xs">8 ans d'excellence</div>
+                            <div class="font-bold text-gray-900 text-xs">Fondé en 2016</div>
+                            <div class="text-gray-400 text-[10px]">8 ans d'excellence</div>
                         </div>
                     </div>
                 </div>
@@ -223,10 +223,10 @@
                 </h2>
                 <div class="section-divider"></div>
 
-                <p class="text-gray-600 leading-relaxed mb-4">
+                <p class="text-gray-600 text-sm leading-relaxed mb-4">
                     Fondé le 05 Septembre 2016, l'Institut International Baye Barhamou (2IBSN) est un établissement d'enseignement privé, internat et externat, situé à Dakar.
                 </p>
-                <p class="text-gray-600 leading-relaxed mb-8">
+                <p class="text-gray-600 text-sm leading-relaxed mb-8">
                     La principale préoccupation de notre direction est d'ouvrir nos élèves tant aux fondamentaux du savoir universel qu'à la pratique éclairée de l'Islam, pour en faire des citoyens accomplis.
                 </p>
 
@@ -235,15 +235,15 @@
                     @foreach(['Curriculum officiel du Sénégal + formation islamique', 'Encadrement par des enseignants diplômés et expérimentés', 'Internat sécurisé avec suivi 24h/24'] as $point)
                     <div class="flex items-start gap-3">
                         <div class="w-5 h-5 rounded-full bg-secondary/15 flex items-center justify-center shrink-0 mt-0.5">
-                            <i class="fas fa-check text-secondary text-[9px]"></i>
+                            <i class="fas fa-check text-secondary text-[8px]"></i>
                         </div>
-                        <p class="text-gray-600 text-sm leading-relaxed">{{ $point }}</p>
+                        <p class="text-gray-600 text-xs leading-relaxed">{{ $point }}</p>
                     </div>
                     @endforeach
                 </div>
 
-                <a href="{{ route('about') }}" class="btn-primary">
-                    Découvrir l'institut <i class="fas fa-arrow-right text-xs"></i>
+                <a href="{{ route('about') }}" class="btn-primary text-sm">
+                    Découvrir l'institut <i class="fas fa-arrow-right text-[10px]"></i>
                 </a>
             </div>
         </div>
@@ -279,17 +279,17 @@
 
                 <div class="p-7">
                     {{-- Icon --}}
-                    <div class="w-14 h-14 rounded-2xl {{ $lightBg }} flex items-center justify-center text-2xl mb-6
+                    <div class="w-12 h-12 rounded-2xl {{ $lightBg }} flex items-center justify-center text-xl mb-6
                                 transition-transform duration-300 group-hover:scale-110">
                         {{ $emoji }}
                     </div>
 
-                    <h3 class="font-serif font-bold text-gray-900 text-xl mb-1">{{ $title }}</h3>
-                    <p class="text-xs font-semibold {{ $accentText }} uppercase tracking-wider mb-4">{{ $sub }}</p>
-                    <p class="text-gray-500 text-sm leading-relaxed">{{ $desc }}</p>
+                    <h3 class="font-serif font-bold text-gray-900 text-lg mb-1">{{ $title }}</h3>
+                    <p class="text-[10px] font-semibold {{ $accentText }} uppercase tracking-wider mb-4">{{ $sub }}</p>
+                    <p class="text-gray-500 text-xs leading-relaxed">{{ $desc }}</p>
 
-                    <a href="{{ route('programs') }}" class="mt-6 inline-flex items-center gap-2 text-xs font-semibold {{ $accentText }} opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        Voir le détail <i class="fas fa-arrow-right text-[9px]"></i>
+                    <a href="{{ route('programs') }}" class="mt-6 inline-flex items-center gap-2 text-[10px] font-semibold {{ $accentText }} opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        Voir le détail <i class="fas fa-arrow-right text-[8px]"></i>
                     </a>
                 </div>
             </div>

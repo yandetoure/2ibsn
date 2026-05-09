@@ -51,7 +51,7 @@
 
         <div class="nav-inner transition-all duration-500">
             <div class="container">
-                <div id="nav-container" class="flex items-center justify-between h-20 lg:h-24 transition-all duration-300">
+                <div id="nav-container" class="flex items-center justify-between h-16 lg:h-20 transition-all duration-300">
 
                     {{-- Logo --}}
                     <a href="{{ route('home') }}" class="flex items-center gap-3 shrink-0 group">
@@ -64,8 +64,8 @@
                             <div class="absolute -inset-2 bg-secondary/10 rounded-full blur-xl scale-0 group-hover:scale-100 transition-transform duration-500"></div>
                         </div>
                         <div class="hidden sm:flex flex-col leading-none">
-                            <span id="logo-name" class="font-serif text-2xl font-bold tracking-tight transition-colors duration-300"></span>
-                            <span id="logo-sub" class="hidden sm:block text-[9px] uppercase tracking-[3px] mt-1 transition-colors duration-300 opacity-80"></span>
+                            <span id="logo-name" class="font-serif text-lg font-bold tracking-tight transition-colors duration-300">{{ App\Models\Setting::get('institute_name', '2IBSN') }}</span>
+                            <span id="logo-sub" class="hidden sm:block text-[7px] uppercase tracking-[3px] mt-1 transition-colors duration-300 opacity-80">Institut Baye Barhamou</span>
                         </div>
                     </a>
 
@@ -78,7 +78,7 @@
                             ['admissions', 'Admissions'],
                         ] as [$route, $label])
                         <a href="{{ route($route) }}"
-                           class="nav-pill px-5 py-2.5 rounded-full text-[13px] font-semibold tracking-wide transition-all duration-300
+                           class="nav-pill px-5 py-2 rounded-full text-[12px] font-semibold tracking-wide transition-all duration-300
                                   {{ request()->routeIs($route) ? 'active shadow-sm' : '' }}">
                             {{ $label }}
                         </a>

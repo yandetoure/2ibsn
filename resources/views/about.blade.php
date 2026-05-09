@@ -9,7 +9,7 @@
 <div class="page-hero py-20 sm:py-28">
     <div class="container relative z-10 text-center">
         <span class="section-label" data-animate="fade-down">Institut 2IBSN</span>
-        <h1 class="font-serif font-bold text-4xl sm:text-5xl lg:text-6xl text-white mt-2 mb-4" data-animate="fade-up">
+        <h1 class="font-serif font-bold text-2xl sm:text-3xl lg:text-4xl text-white mt-2 mb-4" data-animate="fade-up">
             À Propos de l'Institut
         </h1>
         <p class="text-white/65 text-base sm:text-lg uppercase tracking-widest font-light" data-animate="fade-up">
@@ -28,10 +28,10 @@
                 <span class="section-label">Depuis 2016</span>
                 <h2 class="section-title mb-4">Notre <span class="text-secondary">Histoire</span></h2>
                 <div class="section-divider"></div>
-                <p class="text-gray-600 leading-relaxed mb-4">
+                <p class="text-gray-600 text-sm leading-relaxed mb-4">
                     Fondé le 05 Septembre 2016, l'Institut International Baye Barhamou (2IBSN) est un établissement d'enseignement privé, internat et externat, implanté à Dakar.
                 </p>
-                <p class="text-gray-600 leading-relaxed">
+                <p class="text-gray-600 text-sm leading-relaxed">
                     Depuis sa création, l'école s'est engagée à fournir un environnement d'apprentissage stimulant et bienveillant, où chaque élève est encouragé à atteindre son plein potentiel académique et personnel.
                 </p>
             </div>
@@ -58,7 +58,7 @@
             ] as [$emoji, $title, $bg, $text, $desc])
             <div class="group {{ $bg }} rounded-3xl p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_60px_rgba(0,0,0,0.15)]" data-animate="fade-up">
                 <div class="text-4xl mb-6">{{ $emoji }}</div>
-                <h3 class="font-serif font-bold text-xl {{ $text }} mb-4">{{ $title }}</h3>
+                <h3 class="font-serif font-bold text-lg {{ $text }} mb-4">{{ $title }}</h3>
                 <p class="{{ $bg === 'bg-secondary' ? 'text-primary/80' : 'text-white/70' }} text-sm leading-relaxed">{{ $desc }}</p>
             </div>
             @endforeach
@@ -92,8 +92,8 @@
                     {{-- Quote --}}
                     <div class="p-10 sm:p-14 flex flex-col justify-center">
                         <div class="text-6xl text-secondary/20 font-serif leading-none mb-4">"</div>
-                        <h3 class="font-serif font-bold text-2xl text-primary mb-6">Le Mot du Directeur</h3>
-                        <blockquote class="text-gray-600 leading-[1.9] text-base italic font-serif">
+                        <h3 class="font-serif font-bold text-lg text-primary mb-6">Le Mot du Directeur</h3>
+                        <blockquote class="text-gray-600 leading-[1.8] text-sm italic font-serif">
                             La principale préoccupation du dirigeant de 2IBSN est d'ouvrir ses élèves tant aux fondamentaux du savoir universel qu'à la pratique éclairée de l'Islam, pour en faire des êtres vertueux, compétents et utiles à leur société.
                         </blockquote>
                     </div>

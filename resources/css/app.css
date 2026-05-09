@@ -33,7 +33,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-        @apply bg-accent font-sans text-gray-800 antialiased overflow-x-hidden;
+        @apply font-sans text-gray-900 bg-[#ffffff] selection:bg-secondary/30 antialiased text-[15px] overflow-x-hidden;
     }
 
     h1,h2,h3,h4,h5,h6 {
@@ -53,11 +53,14 @@
         @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
     }
 
+    /* Global Buttons */
+    .btn-primary, .btn-secondary, .btn-outline {
+        @apply inline-flex items-center gap-2 px-6 py-3 rounded-full text-[13px] font-semibold tracking-wide transition-all duration-300;
+    }
+
     /* Primary Button */
     .btn-primary {
-        @apply inline-flex items-center gap-2 px-7 py-3.5 bg-secondary text-primary-dark
-               font-semibold rounded-full text-sm uppercase tracking-wider
-               transition-all duration-300 cursor-pointer border-0
+        @apply bg-secondary text-primary-dark cursor-pointer border-0
                hover:bg-secondary-light hover:-translate-y-0.5
                hover:shadow-[0_8px_24px_rgba(212,175,55,0.4)]
                active:translate-y-0;
@@ -65,21 +68,19 @@
 
     /* Outline Button */
     .btn-outline {
-        @apply inline-flex items-center gap-2 px-7 py-3.5
-               border-2 border-white/80 text-white
-               font-semibold rounded-full text-sm uppercase tracking-wider
-               transition-all duration-300 cursor-pointer
+        @apply border-2 border-white/80 text-white
+               cursor-pointer
                hover:bg-white hover:text-primary hover:border-white
                hover:-translate-y-0.5 active:translate-y-0;
     }
 
     /* Section Title */
     .section-title {
-        @apply font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-primary;
+        @apply font-serif font-bold text-2xl sm:text-3xl lg:text-4xl text-primary leading-tight;
     }
 
     .section-label {
-        @apply inline-block text-xs font-semibold uppercase tracking-[3px] text-secondary mb-4;
+        @apply inline-block px-3 py-1 bg-secondary/10 text-secondary text-[10px] font-bold uppercase tracking-[2px] rounded-md mb-4;
     }
 
     .section-divider {
@@ -199,7 +200,7 @@
     background: #ffffff !important;
     border-bottom-color: rgba(0,0,0,0.08) !important;
 }
-.main-header.scrolled #nav-container { height: 72px; }
+.main-header.scrolled #nav-container { height: 60px; }
 .main-header.scrolled .nav-pill.active { @apply bg-primary text-white; }
 
 /* Desktop Nav Pill Hover */

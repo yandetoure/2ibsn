@@ -9,7 +9,7 @@
 <div class="page-hero py-20 sm:py-28">
     <div class="container relative z-10 text-center">
         <span class="section-label" data-animate="fade-down">Cursus scolaires</span>
-        <h1 class="font-serif font-bold text-4xl sm:text-5xl lg:text-6xl text-white mt-2 mb-4" data-animate="fade-up">
+        <h1 class="font-serif font-bold text-2xl sm:text-3xl lg:text-4xl text-white mt-2 mb-4" data-animate="fade-up">
             Nos Programmes
         </h1>
         <p class="text-white/65 text-base sm:text-lg uppercase tracking-widest font-light" data-animate="fade-up">
@@ -93,20 +93,20 @@
                                 {{ $prog['icon'] }}
                             </div>
                             <div>
-                                <h3 class="font-serif font-bold text-xl text-gray-900">{{ $prog['title'] }}</h3>
-                                <p class="text-xs text-gray-400 font-medium mt-0.5">{{ $prog['sub'] }}</p>
+                                <h3 class="font-serif font-bold text-lg text-gray-900">{{ $prog['title'] }}</h3>
+                                <p class="text-[10px] text-gray-400 font-medium mt-0.5">{{ $prog['sub'] }}</p>
                             </div>
                         </div>
                         <span class="shrink-0 px-3 py-1 rounded-full text-xs font-semibold {{ $colors['badge'] }}">{{ $prog['badge'] }}</span>
                     </div>
 
-                    <p class="text-gray-500 text-sm leading-relaxed mb-6">{{ $prog['desc'] }}</p>
+                    <p class="text-gray-500 text-xs leading-relaxed mb-6">{{ $prog['desc'] }}</p>
 
                     <div class="space-y-2.5">
                         @foreach($prog['items'] as $item)
                         <div class="flex items-center gap-3">
                             <i class="fas fa-check-circle {{ $colors['check'] }} text-sm shrink-0"></i>
-                            <span class="text-gray-600 text-sm">{{ $item }}</span>
+                            <span class="text-gray-600 text-xs">{{ $item }}</span>
                         </div>
                         @endforeach
                     </div>
@@ -120,7 +120,7 @@
             <div class="absolute inset-0 opacity-10"
                  style="background: radial-gradient(circle at top right, #d4af37 0%, transparent 60%);"></div>
             <div class="relative z-10">
-                <h3 class="font-serif font-bold text-2xl sm:text-3xl text-white mb-4">Intéressé par nos programmes ?</h3>
+                <h3 class="font-serif font-bold text-xl sm:text-2xl text-white mb-4">Intéressé par nos programmes ?</h3>
                 <p class="text-white/65 text-sm leading-relaxed mb-8 max-w-lg mx-auto">
                     Consultez notre grille tarifaire et les modalités d'inscription pour l'année scolaire en cours.
                 </p>

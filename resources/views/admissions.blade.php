@@ -9,7 +9,7 @@
 <div class="page-hero py-20 sm:py-28">
     <div class="container relative z-10 text-center">
         <span class="section-label" data-animate="fade-down">Rejoignez-nous</span>
-        <h1 class="font-serif font-bold text-4xl sm:text-5xl lg:text-6xl text-white mt-2 mb-4" data-animate="fade-up">
+        <h1 class="font-serif font-bold text-2xl sm:text-3xl lg:text-4xl text-white mt-2 mb-4" data-animate="fade-up">
             Admissions & Inscriptions
         </h1>
         <p class="text-white/65 text-base sm:text-lg uppercase tracking-widest font-light" data-animate="fade-up">
@@ -49,7 +49,7 @@
             <div class="bg-white rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-gray-100" data-animate="fade-up">
                 <div class="px-6 sm:px-8 py-5 border-b border-gray-100 flex items-center gap-3">
                     <div class="w-8 h-8 rounded-xl bg-green-100 flex items-center justify-center text-base">🌱</div>
-                    <h3 class="font-serif font-bold text-lg text-gray-900">Préscolaire</h3>
+                    <h3 class="font-serif font-bold text-base text-gray-900">Préscolaire</h3>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm">
@@ -84,7 +84,7 @@
             <div class="bg-white rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-gray-100" data-animate="fade-up">
                 <div class="px-6 sm:px-8 py-5 border-b border-gray-100 flex items-center gap-3">
                     <div class="w-8 h-8 rounded-xl bg-blue-100 flex items-center justify-center text-base">📐</div>
-                    <h3 class="font-serif font-bold text-lg text-gray-900">Élémentaire (CI – CM2)</h3>
+                    <h3 class="font-serif font-bold text-base text-gray-900">Élémentaire (CI – CM2)</h3>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm">
@@ -125,7 +125,7 @@
             <div class="bg-white rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-gray-100" data-animate="fade-up">
                 <div class="px-6 sm:px-8 py-5 border-b border-gray-100 flex items-center gap-3">
                     <div class="w-8 h-8 rounded-xl bg-purple-100 flex items-center justify-center text-base">🎓</div>
-                    <h3 class="font-serif font-bold text-lg text-gray-900">Collège / Moyen Secondaire</h3>
+                    <h3 class="font-serif font-bold text-base text-gray-900">Collège / Moyen Secondaire</h3>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm">
@@ -165,7 +165,7 @@
                     <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center">
                         <i class="fas fa-info-circle text-amber-500"></i>
                     </div>
-                    <h3 class="font-serif font-bold text-lg text-gray-900">Notes Importantes</h3>
+                    <h3 class="font-serif font-bold text-base text-gray-900">Notes Importantes</h3>
                 </div>
                 <ul class="space-y-4">
                     @foreach([
@@ -187,7 +187,7 @@
                     <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
                         <i class="fas fa-folder-open text-primary"></i>
                     </div>
-                    <h3 class="font-serif font-bold text-lg text-gray-900">Dossier à fournir</h3>
+                    <h3 class="font-serif font-bold text-base text-gray-900">Dossier à fournir</h3>
                 </div>
                 <div class="space-y-4">
                     @foreach([
