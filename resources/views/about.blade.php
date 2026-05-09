@@ -39,7 +39,7 @@
             {{-- Image --}}
             <div class="relative" data-animate="fade-left">
                 <div class="absolute -top-4 -left-4 w-full h-full rounded-3xl border-2 border-secondary/20 -z-10"></div>
-                <img src="{{ asset('Images/Header.jpeg') }}"
+                <img src="{{ asset('Images/WhatsApp Image 2025-12-05 at 21.16.14 (1).jpeg') }}"
                      alt="Institut 2IBSN"
                      class="w-full rounded-3xl shadow-[0_24px_60px_rgba(0,0,0,0.12)] object-cover aspect-[16/10]"
                      loading="lazy">
