@@ -12,15 +12,10 @@
 
     {{-- Carousel slides --}}
     <div class="carousel-container absolute inset-0 z-0">
-        @if($banner = App\Models\Setting::get('banner_image'))
-            <div class="carousel-slide active" style="background-image:url('{{ asset('storage/'.$banner) }}')"></div>
-            <div class="carousel-slide" style="background-image:url('{{ asset('Images/Header.jpeg') }}')"></div>
-        @else
-            <div class="carousel-slide active" style="background-image:url('{{ asset('Images/Header.jpeg') }}')"></div>
-        @endif
-        <div class="carousel-slide" style="background-image:url('{{ asset('Images/header2.jpeg') }}')"></div>
-        <div class="carousel-slide" style="background-image:url('{{ asset('Images/header3.jpeg') }}')"></div>
-        <div class="carousel-slide" style="background-image:url('{{ asset('Images/header4.jpeg') }}')"></div>
+        <div class="carousel-slide active" style="background-image:url('{{ asset('Images/WhatsApp Image 2025-12-05 at 21.16.15 (2).jpeg') }}')"></div>
+        <div class="carousel-slide" style="background-image:url('{{ asset('Images/WhatsApp Image 2025-12-05 at 21.16.15 (3).jpeg') }}')"></div>
+        <div class="carousel-slide" style="background-image:url('{{ asset('Images/WhatsApp Image 2025-12-05 at 21.16.21 (1).jpeg') }}')"></div>
+        <div class="carousel-slide" style="background-image:url('{{ asset('Images/WhatsApp Image 2025-12-05 at 21.16.17 (4).jpeg') }}')"></div>
     </div>
 
     {{-- Gradient overlay --}}

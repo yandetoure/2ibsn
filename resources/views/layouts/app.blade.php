@@ -203,14 +203,14 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 pb-16 border-b border-white/10">
 
                 {{-- Brand --}}
-                <div class="lg:col-span-1">
-                    <div class="flex items-center gap-3 mb-6">
-                        <img src="{{ asset('Images/logo2.png') }}" alt="2IBSN" class="h-14 w-auto" loading="lazy">
+                <div class="lg:col-span-1 flex flex-col items-center sm:items-start text-center sm:text-left">
+                    <div class="flex items-center justify-center sm:justify-start mb-6">
+                        <img src="{{ asset('Images/logo2.png') }}" alt="2IBSN" class="h-20 w-auto" loading="lazy">
                     </div>
                     <p class="text-white/60 text-sm leading-relaxed mb-8">
                         Un établissement d'excellence alliant savoir universel et valeurs islamiques pour former les leaders de demain.
                     </p>
-                    <div class="flex gap-3">
+                    <div class="flex gap-3 justify-center sm:justify-start">
                         @foreach(['facebook-f' => '#', 'instagram' => '#', 'whatsapp' => 'https://wa.me/221773750724', 'youtube' => '#'] as $icon => $href)
                         <a href="{{ $href }}" target="{{ Str::startsWith($href, 'http') ? '_blank' : '_self' }}"
                            class="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/60 text-sm
