@@ -24,22 +24,48 @@
 <body class="bg-[#f7f5f0] font-sans antialiased text-gray-800">
 
     {{-- ════════════════════ HEADER ════════════════════ --}}
+    {{-- ════════════════════ HEADER ════════════════════ --}}
     <header id="main-header" class="main-header fixed w-full top-0 z-[1000] transition-all duration-500">
-        {{-- Inner wrapper: transparent on hero pages, solid otherwise --}}
+        
+        {{-- TOP BAR --}}
+        <div class="top-bar">
+            <div class="container flex items-center justify-between">
+                <div class="flex items-center gap-6">
+                    <a href="tel:+221773750724" class="text-[11px] font-medium flex items-center gap-2 hover:text-secondary transition-colors">
+                        <i class="fas fa-phone text-secondary"></i>
+                        <span>+221 77 375 07 24</span>
+                    </a>
+                    <a href="mailto:contact@2ibsn.edu.sn" class="text-[11px] font-medium flex items-center gap-2 hover:text-secondary transition-colors">
+                        <i class="fas fa-envelope text-secondary"></i>
+                        <span>contact@2ibsn.edu.sn</span>
+                    </a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mr-2">Suivez-nous</span>
+                    <a href="#" class="text-xs hover:text-secondary transition-colors"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-xs hover:text-secondary transition-colors"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/221773750724" target="_blank" class="text-xs hover:text-secondary transition-colors"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+
         <div class="nav-inner transition-all duration-500">
             <div class="container">
-                <div id="nav-container" class="flex items-center justify-between h-20 lg:h-22 transition-all duration-300">
+                <div id="nav-container" class="flex items-center justify-between h-20 lg:h-24 transition-all duration-300">
 
                     {{-- Logo --}}
                     <a href="{{ route('home') }}" class="flex items-center gap-3 shrink-0 group">
-                        @if($logo = App\Models\Setting::get('logo_image'))
-                            <img src="{{ asset('storage/' . $logo) }}" alt="2IBSN Logo" class="logo-img h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105" loading="eager">
-                        @else
-                            <img src="{{ asset('Images/logo.png') }}" alt="2IBSN Logo" class="logo-img h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105" loading="eager">
-                        @endif
+                        <div class="relative">
+                            @if($logo = App\Models\Setting::get('logo_image'))
+                                <img src="{{ asset('storage/' . $logo) }}" alt="2IBSN Logo" class="logo-img h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-110" loading="eager">
+                            @else
+                                <img src="{{ asset('Images/logo.png') }}" alt="2IBSN Logo" class="logo-img h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-110" loading="eager">
+                            @endif
+                            <div class="absolute -inset-2 bg-secondary/10 rounded-full blur-xl scale-0 group-hover:scale-100 transition-transform duration-500"></div>
+                        </div>
                         <div class="hidden sm:flex flex-col leading-none">
-                            <span id="logo-name" class="font-serif text-xl font-bold tracking-tight transition-colors duration-300">{{ App\Models\Setting::get('institute_name', '2IBSN') }}</span>
-                            <span id="logo-sub" class="hidden sm:block text-[9px] uppercase tracking-[2px] mt-0.5 transition-colors duration-300">Institut Baye Barhamou</span>
+                            <span id="logo-name" class="font-serif text-2xl font-bold tracking-tight transition-colors duration-300">{{ App\Models\Setting::get('institute_name', '2IBSN') }}</span>
+                            <span id="logo-sub" class="hidden sm:block text-[9px] uppercase tracking-[3px] mt-1 transition-colors duration-300 opacity-80">Institut Baye Barhamou</span>
                         </div>
                     </a>
 
@@ -52,26 +78,26 @@
                             ['admissions', 'Admissions'],
                         ] as [$route, $label])
                         <a href="{{ route($route) }}"
-                           class="nav-pill px-4 py-2 rounded-full text-sm font-medium transition-all duration-200
-                                  {{ request()->routeIs($route)
-                                     ? 'bg-primary text-white shadow-sm'
-                                     : 'hover:bg-black/5' }}">
+                           class="nav-pill px-5 py-2.5 rounded-full text-[13px] font-semibold tracking-wide transition-all duration-300
+                                  {{ request()->routeIs($route) ? 'active shadow-sm' : '' }}">
                             {{ $label }}
                         </a>
                         @endforeach
 
+                        <div class="h-6 w-px bg-gray-200 mx-4 opacity-50"></div>
+
                         <a href="{{ route('contact') }}"
-                           class="ml-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold
-                                  bg-secondary text-primary-dark uppercase tracking-wider
-                                  transition-all duration-200 hover:bg-secondary-light hover:-translate-y-0.5
-                                  hover:shadow-[0_6px_20px_rgba(212,175,55,0.35)]">
-                            <i class="fas fa-envelope text-xs"></i> Contact
+                           class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[12px] font-bold
+                                  bg-secondary text-primary-dark uppercase tracking-widest
+                                  transition-all duration-300 hover:bg-secondary-light hover:-translate-y-1
+                                  hover:shadow-[0_10px_25px_rgba(212,175,55,0.4)] active:scale-95">
+                            <i class="fas fa-paper-plane text-[10px]"></i> Contact
                         </a>
                     </nav>
 
                     {{-- Hamburger --}}
                     <button id="hamburger"
-                            class="lg:hidden relative w-12 h-12 rounded-2xl flex flex-col items-center justify-center gap-[5px] cursor-pointer border-0 bg-black/5 hover:bg-black/10 transition-all duration-300 active:scale-95"
+                            class="lg:hidden relative w-12 h-12 rounded-2xl flex flex-col items-center justify-center gap-[6px] cursor-pointer border border-black/5 bg-black/5 hover:bg-black/10 transition-all duration-300 active:scale-95"
                             aria-label="Menu">
                         <span class="hamburger-line block h-[2px] w-6 rounded-full transition-all duration-300 origin-center"></span>
                         <span class="hamburger-line block h-[2px] w-6 rounded-full transition-all duration-300"></span>
@@ -83,77 +109,88 @@
     </header>
 
     {{-- ════════════ MOBILE NAV ════════════ --}}
-    <div id="mobile-nav" class="fixed top-0 right-0 h-screen w-full max-w-[320px] z-[999] flex flex-col lg:hidden overflow-hidden"
-         style="background: linear-gradient(160deg, #1a4d2e 0%, #0f3320 100%);">
+    <div id="mobile-nav" class="fixed top-0 right-0 h-screen w-full max-w-[340px] z-[1100] flex flex-col lg:hidden overflow-hidden shadow-2xl"
+         style="background: linear-gradient(165deg, #1a4d2e 0%, #0a2416 100%);">
 
-        {{-- Decorative blob --}}
-        <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full opacity-10 pointer-events-none"
+        {{-- Decorative background elements --}}
+        <div class="absolute -top-20 -right-20 w-80 h-80 rounded-full opacity-10 pointer-events-none"
              style="background: radial-gradient(circle, #d4af37 0%, transparent 70%);"></div>
+        <div class="absolute bottom-20 -left-20 w-64 h-64 rounded-full opacity-5 pointer-events-none"
+             style="background: radial-gradient(circle, #ffffff 0%, transparent 70%);"></div>
 
         {{-- Header --}}
-        <div class="relative flex items-center justify-between px-6 h-20 border-b border-white/10 z-10">
+        <div class="relative flex items-center justify-between px-8 h-24 border-b border-white/5 z-10">
             <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-secondary/20 flex items-center justify-center">
-                    <i class="fas fa-graduation-cap text-secondary text-xs"></i>
+                <div class="w-10 h-10 rounded-xl bg-secondary/20 flex items-center justify-center border border-secondary/20">
+                    <i class="fas fa-graduation-cap text-secondary text-sm"></i>
                 </div>
-                <span class="font-serif text-white font-bold text-lg">2IBSN</span>
+                <div class="flex flex-col">
+                    <span class="font-serif text-white font-bold text-xl leading-none">2IBSN</span>
+                    <span class="text-[8px] text-white/50 uppercase tracking-widest mt-1">Dakar, Sénégal</span>
+                </div>
             </div>
             <button id="mobile-close"
-                    class="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                    class="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center text-white transition-all active:scale-90"
                     aria-label="Fermer">
                 <i class="fas fa-times text-sm"></i>
             </button>
         </div>
 
         {{-- Nav links --}}
-        <nav class="flex flex-col px-4 py-6 gap-1 flex-1 relative z-10">
+        <nav class="flex flex-col px-6 py-10 gap-2 flex-1 relative z-10 overflow-y-auto">
             @foreach([
-                ['home',       'Accueil',     'fas fa-home',            '1'],
-                ['about',      'À propos',    'fas fa-university',      '2'],
-                ['programs',   'Programmes',  'fas fa-book-open',       '3'],
-                ['admissions', 'Admissions',  'fas fa-file-signature',  '4'],
-                ['contact',    'Contact',     'fas fa-envelope',        '5'],
-            ] as [$route, $label, $icon, $num])
+                ['home',       'Accueil',     'fas fa-home'],
+                ['about',      'À propos',    'fas fa-university'],
+                ['programs',   'Programmes',  'fas fa-book-open'],
+                ['admissions', 'Admissions',  'fas fa-file-signature'],
+                ['contact',    'Contact',     'fas fa-envelope'],
+            ] as $i => [$route, $label, $icon])
             @php $isActive = request()->routeIs($route); @endphp
             <a href="{{ route($route) }}"
-               class="group flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-200
-                       {{ $isActive
-                          ? 'bg-secondary text-primary-dark font-semibold'
-                          : 'text-white/75 hover:bg-white/8 hover:text-white' }}">
-                <div class="w-9 h-9 rounded-xl flex items-center justify-center text-sm shrink-0 transition-all
-                            {{ $isActive ? 'bg-primary-dark/20' : 'bg-white/5 group-hover:bg-white/10' }}">
+               class="nav-item group flex items-center gap-5 px-5 py-4 rounded-2xl transition-all duration-300"
+               style="transition-delay: {{ 100 + ($i * 70) }}ms">
+                <div class="w-11 h-11 rounded-xl flex items-center justify-center text-sm shrink-0 transition-all duration-500
+                            {{ $isActive ? 'bg-secondary text-primary-dark shadow-[0_8px_20px_rgba(212,175,55,0.3)]' : 'bg-white/5 text-white/70 group-hover:bg-white/10 group-hover:text-white' }}">
                     <i class="{{ $icon }}"></i>
                 </div>
-                <span class="text-sm font-medium">{{ $label }}</span>
+                <div class="flex flex-col">
+                    <span class="text-sm font-bold tracking-wide {{ $isActive ? 'text-white' : 'text-white/80 group-hover:text-white' }}">{{ $label }}</span>
+                    @if($isActive)
+                        <span class="text-[10px] text-secondary font-medium uppercase tracking-widest mt-0.5">Page actuelle</span>
+                    @endif
+                </div>
                 @if($isActive)
-                <i class="fas fa-chevron-right text-[10px] ml-auto opacity-60"></i>
+                <div class="ml-auto w-1.5 h-1.5 rounded-full bg-secondary shadow-[0_0_10px_#d4af37]"></div>
+                @else
+                <i class="fas fa-chevron-right text-[10px] ml-auto opacity-0 -translate-x-2 group-hover:opacity-30 group-hover:translate-x-0 transition-all"></i>
                 @endif
             </a>
             @endforeach
         </nav>
 
         {{-- Footer info --}}
-        <div class="relative z-10 px-6 py-6 border-t border-white/10 space-y-3">
-            <a href="tel:+221773750724" class="flex items-center gap-3 text-white/60 hover:text-secondary transition-colors text-sm">
-                <div class="w-7 h-7 rounded-lg bg-secondary/10 flex items-center justify-center shrink-0">
-                    <i class="fas fa-phone text-secondary text-xs"></i>
+        <div class="relative z-10 px-8 py-8 border-t border-white/5 space-y-4 bg-black/10">
+            <p class="text-[10px] text-white/30 uppercase tracking-[2px] mb-2 font-bold">Contact Rapide</p>
+            <a href="tel:+221773750724" class="flex items-center gap-4 text-white/60 hover:text-secondary transition-colors text-sm group">
+                <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-secondary/10">
+                    <i class="fas fa-phone text-xs group-hover:text-secondary"></i>
                 </div>
                 +221 77 375 07 24
             </a>
             <a href="https://wa.me/221773750724" target="_blank"
-               class="flex items-center gap-3 text-white/60 hover:text-green-400 transition-colors text-sm">
-                <div class="w-7 h-7 rounded-lg bg-green-500/10 flex items-center justify-center shrink-0">
-                    <i class="fab fa-whatsapp text-green-400 text-xs"></i>
+               class="flex items-center gap-4 text-white/60 hover:text-green-400 transition-colors text-sm group">
+                <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-green-500/10">
+                    <i class="fab fa-whatsapp text-xs group-hover:text-green-400"></i>
                 </div>
                 WhatsApp direct
             </a>
         </div>
     </div>
     {{-- Overlay --}}
-    <div id="mobile-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[998] hidden lg:hidden" aria-hidden="true"></div>
+    <div id="mobile-overlay" class="fixed inset-0 bg-black/80 backdrop-blur-md z-[1050] hidden lg:hidden opacity-0 transition-opacity duration-500" aria-hidden="true"></div>
 
     {{-- ════════════════════ MAIN ════════════════════ --}}
-    <main class="pt-20">
+    <main class="pt-20 lg:pt-32">
         @yield('content')
     </main>
 
@@ -263,15 +300,10 @@
     <script>
     (function () {
         const header  = document.getElementById('main-header');
-        const isHome  = document.querySelector('.carousel-container') !== null;
-
-        // Transparent header on home hero top
+        // Solid header updates
         function updateHeader() {
             const scrolled = window.scrollY > 60;
-            header.classList.toggle('scrolled',  scrolled);
-            if (isHome) {
-                header.classList.toggle('hero-top', !scrolled);
-            }
+            header.classList.toggle('scrolled', scrolled);
         }
         updateHeader();
         window.addEventListener('scroll', updateHeader, { passive: true });
@@ -285,13 +317,15 @@
         function openMenu() {
             mobileNav.classList.add('open');
             overlay.classList.remove('hidden');
+            setTimeout(() => overlay.classList.add('opacity-100'), 10);
             hamburger.classList.add('open');
             document.body.style.overflow = 'hidden';
         }
         function closeMenu() {
             mobileNav.classList.remove('open');
-            overlay.classList.add('hidden');
+            overlay.classList.remove('opacity-100');
             hamburger.classList.remove('open');
+            setTimeout(() => overlay.classList.add('hidden'), 500);
             document.body.style.overflow = '';
         }
         hamburger?.addEventListener('click', openMenu);
