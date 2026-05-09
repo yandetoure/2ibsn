@@ -32,19 +32,19 @@
             <div class="container flex items-center justify-between">
                 <div class="flex items-center gap-6">
                     <a href="tel:+221773750724" class="text-[11px] font-medium flex items-center gap-2 hover:text-secondary transition-colors">
-                        <i class="fas fa-phone text-secondary"></i>
+                        <i class="fas fa-phone text-secondary text-[10px]"></i>
                         <span>+221 77 375 07 24</span>
                     </a>
                     <a href="mailto:contact@2ibsn.edu.sn" class="text-[11px] font-medium flex items-center gap-2 hover:text-secondary transition-colors">
-                        <i class="fas fa-envelope text-secondary"></i>
+                        <i class="fas fa-envelope text-secondary text-[10px]"></i>
                         <span>contact@2ibsn.edu.sn</span>
                     </a>
                 </div>
                 <div class="flex items-center gap-4">
                     <span class="text-[10px] text-gray-400 uppercase tracking-widest mr-2">Suivez-nous</span>
-                    <a href="#" class="text-xs hover:text-secondary transition-colors"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="text-xs hover:text-secondary transition-colors"><i class="fab fa-instagram"></i></a>
-                    <a href="https://wa.me/221773750724" target="_blank" class="text-xs hover:text-secondary transition-colors"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="text-[11px] hover:text-secondary transition-colors"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-[11px] hover:text-secondary transition-colors"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/221773750724" target="_blank" class="text-[11px] hover:text-secondary transition-colors"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
         </div>
