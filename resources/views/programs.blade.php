@@ -9,7 +9,7 @@
 <div class="page-hero py-20 sm:py-28">
     <div class="container relative z-10 text-center">
         <span class="section-label" data-animate="fade-down">Cursus scolaires</span>
-        <h1 class="font-serif font-bold text-2xl sm:text-3xl lg:text-4xl text-white mt-2 mb-4" data-animate="fade-up">
+        <h1 class="font-serif font-bold text-3xl sm:text-4xl lg:text-5xl text-white mt-2 mb-4" data-animate="fade-up">
             Nos Programmes
         </h1>
         <p class="text-white/65 text-base sm:text-lg uppercase tracking-widest font-light" data-animate="fade-up">

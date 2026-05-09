@@ -126,8 +126,8 @@
                 <div class="w-14 h-14 rounded-2xl {{ $bg }} flex items-center justify-center text-2xl mb-6 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
                     {{ $emoji }}
                 </div>
-                <h3 class="font-serif font-bold text-lg text-gray-900 mb-3">{{ $title }}</h3>
-                <p class="text-gray-500 text-xs leading-relaxed">{{ $desc }}</p>
+                <h3 class="font-serif font-bold text-xl text-gray-900 mb-3">{{ $title }}</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">{{ $desc }}</p>
                 <div class="mt-6 flex items-center gap-2 text-[10px] font-semibold {{ $color }} opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <span>En savoir plus</span>
                     <i class="fas fa-arrow-right text-[9px]"></i>
@@ -223,10 +223,10 @@
                 </h2>
                 <div class="section-divider"></div>
 
-                <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                <p class="text-gray-600 leading-relaxed mb-4">
                     Fondé le 05 Septembre 2016, l'Institut International Baye Barhamou (2IBSN) est un établissement d'enseignement privé, internat et externat, situé à Dakar.
                 </p>
-                <p class="text-gray-600 text-sm leading-relaxed mb-8">
+                <p class="text-gray-600 leading-relaxed mb-8">
                     La principale préoccupation de notre direction est d'ouvrir nos élèves tant aux fondamentaux du savoir universel qu'à la pratique éclairée de l'Islam, pour en faire des citoyens accomplis.
                 </p>
 
@@ -284,9 +284,9 @@
                         {{ $emoji }}
                     </div>
 
-                    <h3 class="font-serif font-bold text-gray-900 text-lg mb-1">{{ $title }}</h3>
-                    <p class="text-[10px] font-semibold {{ $accentText }} uppercase tracking-wider mb-4">{{ $sub }}</p>
-                    <p class="text-gray-500 text-xs leading-relaxed">{{ $desc }}</p>
+                    <h3 class="font-serif font-bold text-xl mb-1 text-gray-900">{{ $title }}</h3>
+                    <p class="text-xs font-semibold {{ $accentText }} uppercase tracking-wider mb-4">{{ $sub }}</p>
+                    <p class="text-gray-500 text-sm leading-relaxed">{{ $desc }}</p>
 
                     <a href="{{ route('programs') }}" class="mt-6 inline-flex items-center gap-2 text-[10px] font-semibold {{ $accentText }} opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         Voir le détail <i class="fas fa-arrow-right text-[8px]"></i>
