@@ -56,7 +56,11 @@
                     {{-- Logo --}}
                     <a href="{{ route('home') }}" class="flex items-center gap-3 shrink-0 group">
                         <div class="relative">
-                            <img src="{{ asset('Images/logo.png') }}" alt="2IBSN Logo" class="logo-img h-14 w-auto object-contain transition-transform duration-500 group-hover:scale-110" loading="eager">
+                            @php
+                                $logoPath = App\Models\Setting::get('logo_image');
+                                $logoSrc = $logoPath ? asset('storage/' . $logoPath) : asset('Images/logo.png');
+                            @endphp
+                            <img src="{{ $logoSrc }}" alt="2IBSN Logo" class="logo-img h-14 w-auto object-contain transition-transform duration-500 group-hover:scale-110" loading="eager">
                             <div class="absolute -inset-2 bg-secondary/10 rounded-full blur-xl scale-0 group-hover:scale-100 transition-transform duration-500"></div>
                         </div>
                         <div class="hidden sm:flex flex-col leading-none">
@@ -205,7 +209,11 @@
                 {{-- Brand --}}
                 <div class="lg:col-span-1 flex flex-col items-center sm:items-start text-center sm:text-left">
                     <div class="flex items-center justify-center sm:justify-start mb-6">
-                        <img src="{{ asset('Images/logo2.png') }}" alt="2IBSN" class="h-20 w-auto" loading="lazy">
+                        @php
+                            $footerLogoPath = App\Models\Setting::get('logo_image');
+                            $footerLogoSrc = $footerLogoPath ? asset('storage/' . $footerLogoPath) : asset('Images/logo2.png');
+                        @endphp
+                        <img src="{{ $footerLogoSrc }}" alt="2IBSN" class="h-20 w-auto" loading="lazy">
                     </div>
                     <p class="text-white/60 text-sm leading-relaxed mb-8">
                         Un établissement d'excellence alliant savoir universel et valeurs islamiques pour former les leaders de demain.

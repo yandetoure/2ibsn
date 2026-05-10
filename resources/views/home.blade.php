@@ -12,10 +12,25 @@
 
     {{-- Carousel slides --}}
     <div class="carousel-container absolute inset-0 z-0">
-        <div class="carousel-slide active" style="background-image:url('{{ asset('Images/WhatsApp Image 2025-12-05 at 21.16.15 (2).jpeg') }}')"></div>
-        <div class="carousel-slide" style="background-image:url('{{ asset('Images/WhatsApp Image 2025-12-05 at 21.16.15 (3).jpeg') }}')"></div>
-        <div class="carousel-slide" style="background-image:url('{{ asset('Images/WhatsApp Image 2025-12-05 at 21.16.21 (1).jpeg') }}')"></div>
-        <div class="carousel-slide" style="background-image:url('{{ asset('Images/WhatsApp Image 2025-12-05 at 21.16.17 (4).jpeg') }}')"></div>
+        @php
+            $banners = \App\Models\Media::where('type', 'banner')->where('is_active', true)->orderBy('order')->get();
+            $defaultBanners = [
+                'WhatsApp Image 2025-12-05 at 21.16.15 (2).jpeg',
+                'WhatsApp Image 2025-12-05 at 21.16.15 (3).jpeg',
+                'WhatsApp Image 2025-12-05 at 21.16.21 (1).jpeg',
+                'WhatsApp Image 2025-12-05 at 21.16.17 (4).jpeg'
+            ];
+        @endphp
+
+        @if($banners->count() > 0)
+            @foreach($banners as $index => $banner)
+                <div class="carousel-slide {{ $index === 0 ? 'active' : '' }}" style="background-image:url('{{ asset('storage/' . $banner->file_path) }}')"></div>
+            @endforeach
+        @else
+            @foreach($defaultBanners as $index => $img)
+                <div class="carousel-slide {{ $index === 0 ? 'active' : '' }}" style="background-image:url('{{ asset('Images/' . $img) }}')"></div>
+            @endforeach
+        @endif
     </div>
 
     {{-- Gradient overlay --}}
@@ -247,6 +262,66 @@
 
 
 {{-- ═══════════════════════════════════════════════════════
+     DIRECTOR'S WORD
+══════════════════════════════════════════════════════════ --}}
+<section class="py-24 bg-white overflow-hidden">
+    <div class="container">
+        <div class="relative bg-primary rounded-[3rem] shadow-2xl p-8 sm:p-16">
+            {{-- Decorative elements --}}
+            <div class="absolute top-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl -ml-32 -mb-32"></div>
+
+            <div class="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-12 items-center">
+                {{-- Text Content --}}
+                <div data-animate="fade-right">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-px bg-secondary"></div>
+                        <span class="text-secondary font-semibold uppercase tracking-[3px] text-xs">Mot du Directeur</span>
+                    </div>
+
+                    <h2 class="font-serif font-bold text-3xl sm:text-4xl text-white mb-8 leading-tight">
+                        Une vision d'excellence pour <span class="text-secondary italic">l'avenir de vos enfants</span>
+                    </h2>
+
+                    <div class="space-y-6">
+                        <p class="text-white/80 text-base sm:text-lg leading-relaxed italic font-serif">
+                            "La principale préoccupation de notre direction est d'ouvrir nos élèves tant aux fondamentaux du savoir universel qu'à la pratique éclairée de l'Islam, pour en faire des citoyens accomplis."
+                        </p>
+                        <p class="text-white/70 text-sm leading-relaxed">
+                            Nous croyons fermement qu'une éducation réussie est celle qui harmonise le développement intellectuel et l'ancrage spirituel. À 2IBSN, nous offrons un cadre propice à l'épanouissement de chaque talent, guidé par les valeurs de respect, d'excellence et de solidarité.
+                        </p>
+                    </div>
+
+                    <div class="mt-10 pt-10 border-t border-white/10 flex flex-col sm:flex-row items-center gap-6">
+                        <div class="text-center sm:text-left">
+                            <p class="font-bold text-xl text-white font-serif">Madiara Ndiaye</p>
+                            <p class="text-secondary text-xs uppercase tracking-[2px] mt-1">Directeur de l'Institut</p>
+                        </div>
+                        <a href="{{ route('about') }}" class="btn-outline !border-white/20 !text-white hover:!bg-white hover:!text-primary text-xs">
+                            En savoir plus sur notre vision
+                        </a>
+                    </div>
+                </div>
+
+                {{-- Photo --}}
+                <div class="relative" data-animate="fade-left">
+                    <div class="relative rounded-[2rem] overflow-hidden shadow-2xl aspect-[3/4] group">
+                        <img src="{{ asset('Images/WhatsApp Image 2026-05-09 at 18.42.07.jpeg') }}"
+                             alt="Directeur Madiara Ndiaye"
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent"></div>
+                    </div>
+                    {{-- Decorative frame --}}
+                    <div class="absolute -inset-4 border border-secondary/20 rounded-[2.5rem] -z-10 scale-95 opacity-0 transition-all duration-500 group-hover:scale-100 group-hover:opacity-100"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+{{-- ═══════════════════════════════════════════════════════
      PROGRAMMES CARDS
 ══════════════════════════════════════════════════════════ --}}
 <section class="py-24 bg-white">
@@ -313,34 +388,55 @@
         </div>
 
         @php
-        $galleryImages = [
-            'WhatsApp Image 2025-12-05 at 21.16.18 (2).jpeg',
-            'WhatsApp Image 2025-12-05 at 21.16.17 (2).jpeg',
-            'WhatsApp Image 2025-12-05 at 21.16.13.jpeg',
-            'WhatsApp Image 2025-12-05 at 21.16.15.jpeg',
-            'WhatsApp Image 2025-12-05 at 21.16.16.jpeg',
-            'WhatsApp Image 2025-12-05 at 21.16.17.jpeg',
-            'WhatsApp Image 2025-12-05 at 21.16.18.jpeg',
-            'WhatsApp Image 2025-12-05 at 21.16.19.jpeg',
-        ];
+        $galleryMedia = \App\Models\Media::where('type', 'gallery')->where('is_active', true)->orderBy('order')->get();
         @endphp
 
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-            @foreach($galleryImages as $i => $img)
-            <div class="group relative overflow-hidden rounded-2xl aspect-square shadow-sm cursor-pointer"
-                 data-animate="zoom-in"
-                 style="transition-delay:{{ $i * 60 }}ms">
-                <img src="{{ asset('Images/'.$img) }}"
-                     loading="lazy"
-                     alt="2IBSN vie scolaire"
-                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                <div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/50 transition-all duration-500 flex items-center justify-center">
-                    <div class="text-white text-3xl scale-0 group-hover:scale-100 transition-transform duration-300 delay-75">
-                        <i class="fas fa-plus"></i>
+            @if($galleryMedia->count() > 0)
+                @foreach($galleryMedia as $i => $item)
+                <div class="group relative overflow-hidden rounded-2xl aspect-square shadow-sm cursor-pointer"
+                     data-animate="zoom-in"
+                     style="transition-delay:{{ $i * 60 }}ms">
+                    <img src="{{ asset('storage/'.$item->file_path) }}"
+                         loading="lazy"
+                         alt="{{ $item->title ?? '2IBSN vie scolaire' }}"
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/50 transition-all duration-500 flex items-center justify-center">
+                        <div class="text-white text-3xl scale-0 group-hover:scale-100 transition-transform duration-300 delay-75">
+                            <i class="fas fa-plus"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-            @endforeach
+                @endforeach
+            @else
+                @php
+                $galleryImages = [
+                    'WhatsApp Image 2025-12-05 at 21.16.18 (2).jpeg',
+                    'WhatsApp Image 2025-12-05 at 21.16.17 (2).jpeg',
+                    'WhatsApp Image 2025-12-05 at 21.16.13.jpeg',
+                    'WhatsApp Image 2025-12-05 at 21.16.15.jpeg',
+                    'WhatsApp Image 2025-12-05 at 21.16.16.jpeg',
+                    'WhatsApp Image 2025-12-05 at 21.16.17.jpeg',
+                    'WhatsApp Image 2025-12-05 at 21.16.18.jpeg',
+                    'WhatsApp Image 2025-12-05 at 21.16.19.jpeg',
+                ];
+                @endphp
+                @foreach($galleryImages as $i => $img)
+                <div class="group relative overflow-hidden rounded-2xl aspect-square shadow-sm cursor-pointer"
+                     data-animate="zoom-in"
+                     style="transition-delay:{{ $i * 60 }}ms">
+                    <img src="{{ asset('Images/'.$img) }}"
+                         loading="lazy"
+                         alt="2IBSN vie scolaire"
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/50 transition-all duration-500 flex items-center justify-center">
+                        <div class="text-white text-3xl scale-0 group-hover:scale-100 transition-transform duration-300 delay-75">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            @endif
         </div>
     </div>
 </section>
