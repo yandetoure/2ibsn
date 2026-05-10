@@ -78,8 +78,7 @@
                         <div class="absolute inset-0 opacity-10"
                              style="background: radial-gradient(circle at top right, #d4af37 0%, transparent 60%);"></div>
                         <div class="relative w-36 h-36 rounded-full border-4 border-secondary/30 overflow-hidden shadow-xl mb-6">
-                            <img src="{{ asset('Images/avatar.png') }}"
-                                 onerror="this.src='https://ui-avatars.com/api/?name=Madiara+Ndiaye&background=d4af37&color=1a4d2e&size=200'"
+                            <img src="{{ asset('Images/WhatsApp Image 2026-05-09 at 18.42.07.jpeg') }}"
                                  alt="Directeur"
                                  class="w-full h-full object-cover">
                         </div>
