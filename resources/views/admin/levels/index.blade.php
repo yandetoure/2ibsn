@@ -62,6 +62,13 @@
                                 <a href="{{ route('admin.levels.edit', $level) }}" class="btn btn-secondary btn-sm" title="Modifier">
                                     <i class="fas fa-edit"></i>
                                 </a>
+                                <form action="{{ route('admin.levels.destroy', $level) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce niveau ?');" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" title="Supprimer">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>

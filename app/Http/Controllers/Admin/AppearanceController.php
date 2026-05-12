@@ -69,6 +69,15 @@ class AppearanceController extends Controller
         return redirect()->back()->with('success', 'Couleurs mises à jour avec succès.');
     }
 
+    public function resetColors()
+    {
+        Setting::set('primary_color', '#1a4d2e', 'text', 'appearance');
+        Setting::set('secondary_color', '#d4af37', 'text', 'appearance');
+        Setting::set('accent_color', '#f7f5f0', 'text', 'appearance');
+
+        return redirect()->back()->with('success', 'Couleurs réinitialisées aux valeurs par défaut.');
+    }
+
     public function gallery()
     {
         $media = Media::where('type', 'gallery')->orderBy('order')->orderBy('created_at', 'desc')->paginate(24);

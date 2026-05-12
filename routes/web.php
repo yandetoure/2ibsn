@@ -75,6 +75,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('/appearance/hero', [AppearanceController::class, 'updateHero'])->name('appearance.hero.update');
     Route::get('/appearance/colors', [AppearanceController::class, 'colors'])->name('appearance.colors');
     Route::post('/appearance/colors', [AppearanceController::class, 'updateColors'])->name('appearance.colors.update');
+    Route::post('/appearance/colors/reset', [AppearanceController::class, 'resetColors'])->name('appearance.colors.reset');
     Route::get('/appearance/gallery', [AppearanceController::class, 'gallery'])->name('appearance.gallery');
     
     // Routes années scolaires

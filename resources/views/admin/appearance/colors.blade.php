@@ -49,28 +49,16 @@
 
             <div style="display: flex; gap: 1rem; margin-top: 2rem;">
                 <button type="submit" class="btn btn-primary">Appliquer les Couleurs</button>
-                <button type="button" onclick="resetDefaults()" class="btn btn-secondary">Réinitialiser aux Défauts</button>
             </div>
+        </form>
+
+        <form action="{{ route('admin.appearance.colors.reset') }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment réinitialiser les couleurs aux valeurs par défaut ?');" style="margin-top: 1rem;">
+            @csrf
+            <button type="submit" class="btn btn-secondary">Réinitialiser aux Valeurs par Défaut</button>
         </form>
     </div>
 
     <script>
-        function resetDefaults() {
-            if (confirm('Voulez-vous vraiment réinitialiser les couleurs aux valeurs par défaut ?')) {
-                document.getElementById('primary_color').value = '#1a4d2e';
-                document.getElementById('secondary_color').value = '#d4af37';
-                document.getElementById('accent_color').value = '#f7f5f0';
-                
-                // Update text displays if they exist
-                document.querySelectorAll('input[type="text"][readonly]').forEach(input => {
-                    const colorInput = input.previousElementSibling;
-                    if (colorInput && colorInput.type === 'color') {
-                        input.value = colorInput.value;
-                    }
-                });
-            }
-        }
-
         // Keep text inputs in sync with color pickers
         document.querySelectorAll('input[type="color"]').forEach(picker => {
             picker.addEventListener('input', (e) => {
