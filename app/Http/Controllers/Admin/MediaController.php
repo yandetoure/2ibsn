@@ -71,12 +71,12 @@ class MediaController extends Controller
         return redirect()->back()->with('error', 'Aucun fichier sélectionné.');
     }
 
-    public function edit(Media $media)
+    public function edit(Media $medium)
     {
-        return view('admin.media.edit', compact('media'));
+        return view('admin.media.edit', compact('medium'));
     }
 
-    public function update(Request $request, Media $media)
+    public function update(Request $request, Media $medium)
     {
         $validated = $request->validate([
             'type' => 'required|in:banner,gallery,logo,other',
@@ -88,14 +88,14 @@ class MediaController extends Controller
         ]);
 
         if ($request->hasFile('file')) {
-            if (Storage::disk('public')->exists($media->file_path)) {
-                Storage::disk('public')->delete($media->file_path);
+            if ($medium->file_path && Storage::disk('public')->exists($medium->file_path)) {
+                Storage::disk('public')->delete($medium->file_path);
             }
 
             $file = $request->file('file');
             $path = $file->store('media', 'public');
 
-            $media->update([
+            $medium->update([
                 'file_path' => $path,
                 'file_name' => $file->getClientOriginalName(),
                 'mime_type' => $file->getMimeType(),
@@ -103,26 +103,26 @@ class MediaController extends Controller
             ]);
         }
 
-        $media->update([
+        $medium->update([
             'type' => $validated['type'],
             'title' => $validated['title'] ?? null,
             'description' => $validated['description'] ?? null,
-            'order' => $validated['order'] ?? $media->order,
+            'order' => $validated['order'] ?? $medium->order,
             'is_active' => $request->has('is_active'),
         ]);
 
-        return $this->redirectAfterAction($media, 'Média mis à jour avec succès.');
+        return $this->redirectAfterAction($medium, 'Média mis à jour avec succès.');
     }
 
-    public function destroy(Media $media)
+    public function destroy(Media $medium)
     {
-        $type = $media->type;
+        $type = $medium->type;
         
-        if (Storage::disk('public')->exists($media->file_path)) {
-            Storage::disk('public')->delete($media->file_path);
+        if ($medium->file_path && Storage::disk('public')->exists($medium->file_path)) {
+            Storage::disk('public')->delete($medium->file_path);
         }
 
-        $media->delete();
+        $medium->delete();
 
         if ($type === 'banner') {
             return redirect()->route('admin.appearance.hero')->with('success', 'Bannière supprimée.');
@@ -133,11 +133,11 @@ class MediaController extends Controller
         return redirect()->back()->with('success', 'Média supprimé.');
     }
 
-    protected function redirectAfterAction(Media $media, string $message)
+    protected function redirectAfterAction(Media $medium, string $message)
     {
-        if ($media->type === 'banner') {
+        if ($medium->type === 'banner') {
             return redirect()->route('admin.appearance.hero')->with('success', $message);
-        } elseif ($media->type === 'gallery') {
+        } elseif ($medium->type === 'gallery') {
             return redirect()->route('admin.appearance.gallery')->with('success', $message);
         }
 
