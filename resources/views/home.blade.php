@@ -51,21 +51,27 @@
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-white/90 text-xs font-semibold uppercase tracking-[3px] mb-8"
                  data-animate="fade-down">
                 <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
-                Fondé en 2016 · Dakar, Sénégal
+                {{ App\Models\Setting::get('hero_label', 'Fondé en 2016 · Dakar, Sénégal') }}
             </div>
 
             {{-- Headline --}}
             <h1 class="font-serif font-bold leading-[1.1] mb-6" data-animate="fade-up">
-                <span class="block text-2xl sm:text-3xl lg:text-5xl text-white">Éducation d'Excellence</span>
+                @php
+                    $heroTitle = App\Models\Setting::get('hero_title', "Éducation d'Excellence & Valeurs Islamiques");
+                    $titleParts = explode('&', $heroTitle);
+                @endphp
+                <span class="block text-2xl sm:text-3xl lg:text-5xl text-white">{{ trim($titleParts[0]) }}</span>
+                @if(isset($titleParts[1]))
                 <span class="block text-2xl sm:text-3xl lg:text-5xl mt-1"
                       style="background:linear-gradient(135deg,#d4af37,#f3cf55,#d4af37);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
-                    &amp; Valeurs Islamiques
+                    &amp; {{ trim($titleParts[1]) }}
                 </span>
+                @endif
             </h1>
 
             {{-- Sub --}}
             <p class="text-[13px] sm:text-sm text-white/75 leading-relaxed max-w-xl mx-auto mb-10" data-animate="fade-up">
-                L'Institut International Baye Barhamou forme les leaders de demain à travers un cursus franco-islamique unique, de la maternelle au collège.
+                {{ App\Models\Setting::get('hero_subtitle', "L'Institut International Baye Barhamou forme les leaders de demain à travers un cursus franco-islamique unique, de la maternelle au collège.") }}
             </p>
 
             {{-- CTA --}}

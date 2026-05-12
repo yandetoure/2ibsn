@@ -37,15 +37,16 @@
         {{-- Title --}}
         <div class="text-center mb-12" data-animate="fade-up">
             <span class="section-label">Frais de scolarité</span>
-            <h2 class="section-title">Grille Tarifaire <span class="text-secondary">Externat</span></h2>
+            <h2 class="section-title">Grille Tarifaire <span class="text-secondary">Annuelle</span></h2>
             <div class="section-divider mx-auto"></div>
-            <p class="mt-4 text-gray-500 text-sm">Franco-Arabe · Année scolaire en cours</p>
+            <p class="mt-4 text-gray-500 text-sm">Franco-Arabe · Année scolaire {{ date('Y') }}/{{ date('Y') + 1 }}</p>
         </div>
 
         {{-- Tables --}}
         <div class="space-y-12">
 
             {{-- Préscolaire --}}
+            @if($preschoolLevels->count() > 0)
             <div class="bg-white rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-gray-100" data-animate="fade-up">
                 <div class="px-6 sm:px-8 py-5 border-b border-gray-100 flex items-center gap-3">
                     <div class="w-8 h-8 rounded-xl bg-green-100 flex items-center justify-center text-base">🌱</div>
@@ -63,24 +64,23 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-50">
-                            @foreach([
-                                ['Petite Section',  '24 000 F', '12 000 F', '24 000 F', '20 000 F'],
-                                ['Moyenne Section', '24 000 F', '12 000 F', '24 000 F', '20 000 F'],
-                                ['Grande Section',  '24 000 F', '12 000 F', '24 000 F', '20 000 F'],
-                            ] as $row)
+                            @foreach($preschoolLevels as $level)
                             <tr class="hover:bg-gray-50/60 transition-colors">
-                                <td class="px-6 py-4 font-semibold text-gray-900">{{ $row[0] }}</td>
-                                @foreach(array_slice($row, 1) as $val)
-                                <td class="px-6 py-4 text-gray-600">{{ $val }}</td>
-                                @endforeach
+                                <td class="px-6 py-4 font-semibold text-gray-900">{{ $level->name }}</td>
+                                <td class="px-6 py-4 text-gray-600">{{ number_format($level->registration_fee, 0, ',', ' ') }} F</td>
+                                <td class="px-6 py-4 text-gray-600">{{ number_format($level->monthly_fee, 0, ',', ' ') }} F</td>
+                                <td class="px-6 py-4 text-gray-600">{{ number_format($level->half_pension_registration_fee, 0, ',', ' ') }} F</td>
+                                <td class="px-6 py-4 text-gray-600">{{ number_format($level->half_pension_monthly_fee, 0, ',', ' ') }} F</td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
+            @endif
 
             {{-- Élémentaire --}}
+            @if($elementaryLevels->count() > 0)
             <div class="bg-white rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-gray-100" data-animate="fade-up">
                 <div class="px-6 sm:px-8 py-5 border-b border-gray-100 flex items-center gap-3">
                     <div class="w-8 h-8 rounded-xl bg-blue-100 flex items-center justify-center text-base">📐</div>
@@ -98,30 +98,23 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-50">
-                            @php
-                            $levels = [
-                                ['CI',  '25 000 F', '12 000 F', '25 000 F', '25 000 F'],
-                                ['CP',  '25 000 F', '12 000 F', '25 000 F', '25 000 F'],
-                                ['CE1', '25 000 F', '12 000 F', '29 000 F', '29 000 F'],
-                                ['CE2', '25 000 F', '12 000 F', '29 000 F', '29 000 F'],
-                                ['CM1', '25 000 F', '12 000 F', '33 000 F', '33 000 F'],
-                                ['CM2', '25 000 F', '12 000 F', '33 000 F', '33 000 F'],
-                            ];
-                            @endphp
-                            @foreach($levels as $row)
+                            @foreach($elementaryLevels as $level)
                             <tr class="hover:bg-gray-50/60 transition-colors">
-                                <td class="px-6 py-4 font-semibold text-gray-900">{{ $row[0] }}</td>
-                                @foreach(array_slice($row, 1) as $val)
-                                <td class="px-6 py-4 text-gray-600">{{ $val }}</td>
-                                @endforeach
+                                <td class="px-6 py-4 font-semibold text-gray-900">{{ $level->name }}</td>
+                                <td class="px-6 py-4 text-gray-600">{{ number_format($level->registration_fee, 0, ',', ' ') }} F</td>
+                                <td class="px-6 py-4 text-gray-600">{{ number_format($level->monthly_fee, 0, ',', ' ') }} F</td>
+                                <td class="px-6 py-4 text-gray-600">{{ number_format($level->half_pension_registration_fee, 0, ',', ' ') }} F</td>
+                                <td class="px-6 py-4 text-gray-600">{{ number_format($level->half_pension_monthly_fee, 0, ',', ' ') }} F</td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
+            @endif
 
             {{-- Collège --}}
+            @if($collegeLevels->count() > 0)
             <div class="bg-white rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-gray-100" data-animate="fade-up">
                 <div class="px-6 sm:px-8 py-5 border-b border-gray-100 flex items-center gap-3">
                     <div class="w-8 h-8 rounded-xl bg-purple-100 flex items-center justify-center text-base">🎓</div>
@@ -137,23 +130,18 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-50">
-                            @foreach([
-                                ['6ème', '34 000 F', '17 000 F'],
-                                ['5ème', '34 000 F', '17 000 F'],
-                                ['4ème', '44 000 F', '19 000 F'],
-                                ['3ème', '50 000 F', '25 000 F'],
-                            ] as $row)
+                            @foreach($collegeLevels as $level)
                             <tr class="hover:bg-gray-50/60 transition-colors">
-                                <td class="px-6 py-4 font-semibold text-gray-900">{{ $row[0] }}</td>
-                                @foreach(array_slice($row, 1) as $val)
-                                <td class="px-6 py-4 text-gray-600">{{ $val }}</td>
-                                @endforeach
+                                <td class="px-6 py-4 font-semibold text-gray-900">{{ $level->name }}</td>
+                                <td class="px-6 py-4 text-gray-600">{{ number_format($level->registration_fee, 0, ',', ' ') }} F</td>
+                                <td class="px-6 py-4 text-gray-600">{{ number_format($level->monthly_fee, 0, ',', ' ') }} F</td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
+            @endif
         </div>
 
         {{-- Notes + Dossier --}}

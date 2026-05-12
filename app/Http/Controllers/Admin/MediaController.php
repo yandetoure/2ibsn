@@ -9,50 +9,66 @@ use Illuminate\Support\Facades\Storage;
 
 class MediaController extends Controller
 {
-    public function index(Request $request)
+    public function create(Request $request)
     {
-        $query = Media::query();
-
-        if ($request->has('type')) {
-            $query->where('type', $request->type);
-        }
-
-        $media = $query->orderBy('order')->orderBy('created_at', 'desc')->paginate(20);
-        return view('admin.media.index', compact('media'));
-    }
-
-    public function create()
-    {
-        return view('admin.media.create');
+        $type = $request->query('type', 'gallery');
+        return view('admin.media.create', compact('type'));
     }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'type' => 'required|in:banner,gallery,logo,other',
             'title' => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'file' => 'required|image|max:10240',
             'order' => 'nullable|integer|min:0',
         ]);
 
-        $file = $request->file('file');
-        $path = $file->store('media', 'public');
+        if ($request->hasFile('files')) {
+            $files = $request->file('files');
+            foreach ($files as $file) {
+                $path = $file->store('media', 'public');
+                Media::create([
+                    'type' => $request->type,
+                    'title' => $request->title,
+                    'description' => $request->description,
+                    'file_path' => $path,
+                    'file_name' => $file->getClientOriginalName(),
+                    'mime_type' => $file->getMimeType(),
+                    'file_size' => $file->getSize(),
+                    'order' => $request->order ?? 0,
+                    'is_active' => true,
+                ]);
+            }
+            
+            $message = count($files) . ' médias ajoutés avec succès.';
+            if ($request->type === 'banner') {
+                return redirect()->route('admin.appearance.hero')->with('success', $message);
+            } elseif ($request->type === 'gallery') {
+                return redirect()->route('admin.appearance.gallery')->with('success', $message);
+            }
+            return redirect()->back()->with('success', $message);
+        }
 
-        $media = Media::create([
-            'type' => $validated['type'],
-            'title' => $validated['title'] ?? null,
-            'description' => $validated['description'] ?? null,
-            'file_path' => $path,
-            'file_name' => $file->getClientOriginalName(),
-            'mime_type' => $file->getMimeType(),
-            'file_size' => $file->getSize(),
-            'order' => $validated['order'] ?? 0,
-            'is_active' => true,
-        ]);
+        // Fallback for single file (if any old forms exist)
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $path = $file->store('media', 'public');
+            $media = Media::create([
+                'type' => $request->type,
+                'title' => $request->title,
+                'description' => $request->description,
+                'file_path' => $path,
+                'file_name' => $file->getClientOriginalName(),
+                'mime_type' => $file->getMimeType(),
+                'file_size' => $file->getSize(),
+                'order' => $request->order ?? 0,
+                'is_active' => true,
+            ]);
+            return $this->redirectAfterAction($media, 'Média ajouté avec succès.');
+        }
 
-        return redirect()->route('admin.media.index')
-            ->with('success', 'Média ajouté avec succès.');
+        return redirect()->back()->with('error', 'Aucun fichier sélectionné.');
     }
 
     public function edit(Media $media)
@@ -72,7 +88,6 @@ class MediaController extends Controller
         ]);
 
         if ($request->hasFile('file')) {
-            // Supprimer l'ancien fichier
             if (Storage::disk('public')->exists($media->file_path)) {
                 Storage::disk('public')->delete($media->file_path);
             }
@@ -96,19 +111,36 @@ class MediaController extends Controller
             'is_active' => $request->has('is_active'),
         ]);
 
-        return redirect()->route('admin.media.index')
-            ->with('success', 'Média mis à jour avec succès.');
+        return $this->redirectAfterAction($media, 'Média mis à jour avec succès.');
     }
 
     public function destroy(Media $media)
     {
+        $type = $media->type;
+        
         if (Storage::disk('public')->exists($media->file_path)) {
             Storage::disk('public')->delete($media->file_path);
         }
 
         $media->delete();
 
-        return redirect()->route('admin.media.index')
-            ->with('success', 'Média supprimé avec succès.');
+        if ($type === 'banner') {
+            return redirect()->route('admin.appearance.hero')->with('success', 'Bannière supprimée.');
+        } elseif ($type === 'gallery') {
+            return redirect()->route('admin.appearance.gallery')->with('success', 'Photo supprimée.');
+        }
+
+        return redirect()->back()->with('success', 'Média supprimé.');
+    }
+
+    protected function redirectAfterAction(Media $media, string $message)
+    {
+        if ($media->type === 'banner') {
+            return redirect()->route('admin.appearance.hero')->with('success', $message);
+        } elseif ($media->type === 'gallery') {
+            return redirect()->route('admin.appearance.gallery')->with('success', $message);
+        }
+
+        return redirect()->back()->with('success', $message);
     }
 }

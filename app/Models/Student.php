@@ -21,6 +21,7 @@ class Student extends Model
         'level_id',
         'is_boarding',
         'is_day_student',
+        'is_half_pension',
         'is_holiday',
         'is_preschool',
         'father_name',

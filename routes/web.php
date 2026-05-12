@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\AppearanceController;
 use App\Http\Controllers\Admin\SchoolYearController;
 use App\Http\Controllers\Admin\ImportExportController;
 use App\Http\Controllers\Admin\ReceiptController;
@@ -26,7 +27,10 @@ Route::get('/programmes', function () {
 })->name('programs');
 
 Route::get('/admissions', function () {
-    return view('admissions');
+    $preschoolLevels = \App\Models\Level::where('category', 'preschool')->where('is_active', true)->orderBy('id')->get();
+    $elementaryLevels = \App\Models\Level::where('category', 'elementary')->where('is_active', true)->orderBy('id')->get();
+    $collegeLevels = \App\Models\Level::where('category', 'college')->where('is_active', true)->orderBy('id')->get();
+    return view('admissions', compact('preschoolLevels', 'elementaryLevels', 'collegeLevels'));
 })->name('admissions');
 
 Route::get('/contact', function () {
@@ -60,11 +64,18 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('levels', LevelController::class);
     
     // Routes médias
-    Route::resource('media', MediaController::class);
+    Route::resource('media', MediaController::class)->except(['index']);
     
     // Routes paramètres
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
+    
+    // Routes Apparence (Hero, Couleurs)
+    Route::get('/appearance/hero', [AppearanceController::class, 'hero'])->name('appearance.hero');
+    Route::post('/appearance/hero', [AppearanceController::class, 'updateHero'])->name('appearance.hero.update');
+    Route::get('/appearance/colors', [AppearanceController::class, 'colors'])->name('appearance.colors');
+    Route::post('/appearance/colors', [AppearanceController::class, 'updateColors'])->name('appearance.colors.update');
+    Route::get('/appearance/gallery', [AppearanceController::class, 'gallery'])->name('appearance.gallery');
     
     // Routes années scolaires
     Route::resource('school-years', SchoolYearController::class);

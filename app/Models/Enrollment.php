@@ -18,6 +18,7 @@ class Enrollment extends Model
         'total_paid',
         'remaining_amount',
         'monthly_fee',
+        'registration_fee',
         'status',
         'notes',
     ];
@@ -28,6 +29,7 @@ class Enrollment extends Model
         'total_paid' => 'decimal:2',
         'remaining_amount' => 'decimal:2',
         'monthly_fee' => 'decimal:2',
+        'registration_fee' => 'decimal:2',
         'first_monthly_included' => 'boolean',
     ];
 

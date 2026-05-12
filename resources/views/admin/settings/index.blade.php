@@ -1,88 +1,55 @@
 @extends('admin.layout')
 
-@section('title', 'Paramètres - 2IBSN')
-@section('page-title', 'Paramètres')
+@section('title', 'Paramètres Généraux - 2IBSN')
+@section('page-title', 'Paramètres Généraux')
 
 @section('content')
     <div class="card">
-        <h2 style="margin-bottom: 1.5rem;">Paramètres de l'Institut</h2>
+        <h2 style="margin-bottom: 1.5rem; color: var(--primary);">Informations sur l'Institut</h2>
 
         <form action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="form-section">
-                <h3 class="section-title">Informations Générales</h3>
-
                 <div class="form-group">
-                    <label for="setting_institute_name">Nom de l'Institut</label>
-                    <input type="text" id="setting_institute_name" name="setting_institute_name"
+                    <label for="institute_name">Nom de l'Institut</label>
+                    <input type="text" id="institute_name" name="institute_name"
                         value="{{ App\Models\Setting::get('institute_name', 'Institut International Baye Barhamou') }}">
                 </div>
 
                 <div class="form-group">
-                    <label for="setting_institute_address">Adresse</label>
-                    <textarea id="setting_institute_address" name="setting_institute_address"
-                        rows="2">{{ App\Models\Setting::get('institute_address', '') }}</textarea>
+                    <label for="institute_address">Adresse</label>
+                    <textarea id="institute_address" name="institute_address"
+                        rows="2">{{ App\Models\Setting::get('institute_address', 'Dakar, Sénégal, Quartier Liberté 6') }}</textarea>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="setting_institute_phone">Téléphone</label>
-                        <input type="text" id="setting_institute_phone" name="setting_institute_phone"
-                            value="{{ App\Models\Setting::get('institute_phone', '') }}">
+                        <label for="institute_phone">Téléphone</label>
+                        <input type="text" id="institute_phone" name="institute_phone"
+                            value="{{ App\Models\Setting::get('institute_phone', '+221 77 375 07 24') }}">
                     </div>
                     <div class="form-group">
-                        <label for="setting_institute_email">Email</label>
-                        <input type="email" id="setting_institute_email" name="setting_institute_email"
-                            value="{{ App\Models\Setting::get('institute_email', '') }}">
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-section">
-                <h3 class="section-title">Apparence & Couleurs</h3>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="setting_primary_color">Couleur Primaire</label>
-                        <input type="color" id="setting_primary_color" name="setting_primary_color"
-                            value="{{ App\Models\Setting::get('primary_color', '#1e40af') }}"
-                            style="height: 40px; padding: 2px;">
-                    </div>
-                    <div class="form-group">
-                        <label for="setting_secondary_color">Couleur Secondaire</label>
-                        <input type="color" id="setting_secondary_color" name="setting_secondary_color"
-                            value="{{ App\Models\Setting::get('secondary_color', '#10b981') }}"
-                            style="height: 40px; padding: 2px;">
+                        <label for="institute_email">Email</label>
+                        <input type="email" id="institute_email" name="institute_email"
+                            value="{{ App\Models\Setting::get('institute_email', 'contact@2ibsn.edu.sn') }}">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="setting_banner_image">Image de la Section Hero</label>
-                    @if($path = App\Models\Setting::get('banner_image'))
-                        <div style="margin-bottom: 0.5rem;">
-                            <img src="{{ asset('storage/' . $path) }}" alt="Banner"
-                                style="max-height: 100px; border-radius: 4px;">
-                        </div>
-                    @endif
-                    <input type="file" id="setting_banner_image" name="setting_banner_image" accept="image/*">
-                    <small>Format recommandé: 1920x800px. Laisse vide pour garder l'image actuelle.</small>
-                </div>
-
-                <div class="form-group">
-                    <label for="setting_logo_image">Logo de l'Institut</label>
+                    <label for="logo_image">Logo de l'Institut</label>
                     @if($logo = App\Models\Setting::get('logo_image'))
-                        <div style="margin-bottom: 0.5rem;">
+                        <div style="margin-bottom: 0.5rem; background: #f9fafb; padding: 10px; border-radius: 8px; display: inline-block;">
                             <img src="{{ asset('storage/' . $logo) }}" alt="Logo" style="max-height: 60px; border-radius: 4px;">
                         </div>
                     @endif
-                    <input type="file" id="setting_logo_image" name="setting_logo_image" accept="image/*">
+                    <input type="file" id="logo_image" name="logo_image" accept="image/*">
                     <small>Laisse vide pour garder le logo actuel.</small>
                 </div>
             </div>
 
             <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                <button type="submit" class="btn btn-primary">Enregistrer les Paramètres</button>
+                <button type="submit" class="btn btn-primary">Enregistrer les Informations</button>
             </div>
         </form>
     </div>
@@ -90,18 +57,33 @@
     <style>
         .form-section {
             margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid #e5e7eb;
         }
 
-        .form-section:last-child {
-            border-bottom: none;
+        .form-group {
+            margin-bottom: 1.5rem;
         }
 
-        .section-title {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .form-group input, 
+        .form-group textarea {
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 0.75rem;
+            width: 100%;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 77, 46, 0.1);
+            outline: none;
         }
     </style>
 @endsection

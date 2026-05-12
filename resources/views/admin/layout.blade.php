@@ -10,9 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1a4d2e;
-            --secondary: #d4af37;
-            --accent: #f5f5f0;
+            --primary: {{ App\Models\Setting::get('primary_color', '#1a4d2e') }};
+            --secondary: {{ App\Models\Setting::get('secondary_color', '#d4af37') }};
+            --accent: {{ App\Models\Setting::get('accent_color', '#f5f5f0') }};
             --text-dark: #1f2937;
             --text-light: #4b5563;
             --white: #ffffff;
@@ -86,6 +86,15 @@
         .nav-item.active {
             background: rgba(255, 255, 255, 0.1);
             color: white;
+        }
+
+        .nav-section-title {
+            padding: 1.5rem 1.5rem 0.5rem;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 700;
         }
 
         .main-content {
@@ -380,6 +389,8 @@
             <nav class="sidebar-nav">
                 <a href="{{ route('admin.dashboard') }}"
                     class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Dashboard</a>
+                
+                <div class="nav-section-title">Gestion Académique</div>
                 <a href="{{ route('admin.students.index') }}"
                     class="nav-item {{ request()->routeIs('admin.students.*') ? 'active' : '' }}">Élèves</a>
                 <a href="{{ route('admin.payments.index') }}"
@@ -387,13 +398,19 @@
                 <a href="{{ route('admin.levels.index') }}"
                     class="nav-item {{ request()->routeIs('admin.levels.*') ? 'active' : '' }}">Niveaux</a>
                 <a href="{{ route('admin.school-years.index') }}"
-                    class="nav-item {{ request()->routeIs('admin.school-years.*') ? 'active' : '' }}">Années
-                    Scolaires</a>
-                <a href="{{ route('admin.media.index') }}"
-                    class="nav-item {{ request()->routeIs('admin.media.*') ? 'active' : '' }}">Médias</a>
+                    class="nav-item {{ request()->routeIs('admin.school-years.*') ? 'active' : '' }}">Années Scolaires</a>
+
+                <div class="nav-section-title">Configuration Site</div>
                 <a href="{{ route('admin.settings.index') }}"
-                    class="nav-item {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">Paramètres</a>
-                <a href="{{ route('home') }}" class="nav-item">Site Web</a>
+                    class="nav-item {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">Paramètres Généraux</a>
+                <a href="{{ route('admin.appearance.hero') }}"
+                    class="nav-item {{ request()->routeIs('admin.appearance.hero') ? 'active' : '' }}">Section Hero</a>
+                <a href="{{ route('admin.appearance.colors') }}"
+                    class="nav-item {{ request()->routeIs('admin.appearance.colors') ? 'active' : '' }}">Couleurs & Thème</a>
+                <a href="{{ route('admin.appearance.gallery') }}"
+                    class="nav-item {{ request()->routeIs('admin.appearance.gallery') ? 'active' : '' }}">Galerie Photos</a>
+                
+                <a href="{{ route('home') }}" class="nav-item" target="_blank">Voir le Site Web</a>
             </nav>
         </aside>
 

@@ -63,6 +63,7 @@ class StudentController extends Controller
             'level_id' => 'required|exists:levels,id',
             'is_boarding' => 'boolean',
             'is_day_student' => 'boolean',
+            'is_half_pension' => 'boolean',
             'is_holiday' => 'boolean',
             'is_preschool' => 'boolean',
             'father_name' => 'nullable|string|max:255',
@@ -82,6 +83,7 @@ class StudentController extends Controller
 
         $validated['is_boarding'] = $request->has('is_boarding');
         $validated['is_day_student'] = $request->has('is_day_student');
+        $validated['is_half_pension'] = $request->has('is_half_pension');
         $validated['is_holiday'] = $request->has('is_holiday');
         $validated['is_preschool'] = $request->has('is_preschool');
 

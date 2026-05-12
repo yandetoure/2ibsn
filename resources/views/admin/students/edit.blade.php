@@ -94,6 +94,12 @@
                 </div>
                 <div class="form-group">
                     <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" name="is_half_pension" value="1" {{ old('is_half_pension', $student->is_half_pension) ? 'checked' : '' }}>
+                        <span>Demi-Pension</span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 0.5rem;">
                         <input type="checkbox" name="is_holiday" value="1" {{ old('is_holiday', $student->is_holiday) ? 'checked' : '' }}>
                         <span>Vacance</span>
                     </label>

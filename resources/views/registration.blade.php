@@ -3,437 +3,245 @@
 @section('title', 'Formulaire d\'Inscription - 2IBSN')
 
 @section('content')
-<div class="page-header">
+<div class="page-header py-12 bg-primary text-white text-center">
     <div class="container">
-        <h1>FICHE D'INSCRIPTION</h1>
-        <p>INSTITUT INTERNATIONAL BAYE BARHAMOU</p>
+        <h1 class="text-3xl font-serif font-bold">FICHE D'INSCRIPTION</h1>
+        <p class="uppercase tracking-widest text-sm opacity-80 mt-2">INSTITUT INTERNATIONAL BAYE BARHAMOU</p>
     </div>
 </div>
 
-<section class="section">
+<section class="py-16 bg-[#f7f5f0]">
     <div class="container">
-        <form action="{{ route('registration.store') }}" method="POST" class="registration-form">
+        <form action="{{ route('registration.store') }}" method="POST" class="registration-form max-w-4xl mx-auto bg-white p-8 rounded-3xl shadow-lg">
             @csrf
 
             <!-- Type d'inscription -->
-            <div class="form-section">
-                <h2 class="section-title">Type d'Inscription</h2>
-                <div class="form-group checkbox-group">
-                    <label class="checkbox-label">
+            <div class="form-section mb-12 pb-8 border-b border-gray-100">
+                <h2 class="text-xl font-serif font-bold mb-6 text-primary flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-sm">1</span>
+                    Type d'Inscription
+                </h2>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <label class="p-4 border rounded-2xl cursor-pointer hover:border-primary transition-all flex items-center gap-3">
                         <input type="checkbox" name="is_boarding" value="1" {{ old('is_boarding') ? 'checked' : '' }}>
-                        <span>Internat</span>
+                        <span class="text-sm font-semibold">Internat</span>
                     </label>
-                    <label class="checkbox-label">
+                    <label class="p-4 border rounded-2xl cursor-pointer hover:border-primary transition-all flex items-center gap-3">
                         <input type="checkbox" name="is_day_student" value="1" {{ old('is_day_student') ? 'checked' : '' }}>
-                        <span>Externat</span>
+                        <span class="text-sm font-semibold">Externat</span>
                     </label>
-                    <label class="checkbox-label">
+                    <label class="p-4 border rounded-2xl cursor-pointer hover:border-primary transition-all flex items-center gap-3">
+                        <input type="checkbox" name="is_half_pension" value="1" {{ old('is_half_pension') ? 'checked' : '' }} id="is_half_pension">
+                        <span class="text-sm font-semibold">Demi-Pension</span>
+                    </label>
+                    <label class="p-4 border rounded-2xl cursor-pointer hover:border-primary transition-all flex items-center gap-3">
                         <input type="checkbox" name="is_holiday" value="1" {{ old('is_holiday') ? 'checked' : '' }}>
-                        <span>Vacance</span>
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="is_preschool" value="1" {{ old('is_preschool') ? 'checked' : '' }}>
-                        <span>Préscolaire</span>
+                        <span class="text-sm font-semibold">Vacance</span>
                     </label>
                 </div>
             </div>
 
             <!-- Informations de l'élève -->
-            <div class="form-section">
-                <h2 class="section-title">Informations de l'Élève</h2>
+            <div class="form-section mb-12 pb-8 border-b border-gray-100">
+                <h2 class="text-xl font-serif font-bold mb-6 text-primary flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-sm">2</span>
+                    Informations de l'Élève
+                </h2>
                 
-                <div class="form-row">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div class="form-group">
-                        <label for="gender">Sexe <span class="required">*</span></label>
-                        <div class="radio-group">
-                            <label class="radio-label">
+                        <label class="block text-sm font-semibold mb-2">Sexe <span class="text-red-500">*</span></label>
+                        <div class="flex gap-4">
+                            <label class="flex items-center gap-2 cursor-pointer">
                                 <input type="radio" name="gender" value="M" {{ old('gender') == 'M' ? 'checked' : '' }} required>
-                                <span>M</span>
+                                <span>Garçon (M)</span>
                             </label>
-                            <label class="radio-label">
+                            <label class="flex items-center gap-2 cursor-pointer">
                                 <input type="radio" name="gender" value="F" {{ old('gender') == 'F' ? 'checked' : '' }}>
-                                <span>F</span>
+                                <span>Fille (F)</span>
                             </label>
                         </div>
-                        @error('gender')<span class="error">{{ $message }}</span>@enderror
                     </div>
-                </div>
 
-                <div class="form-row">
                     <div class="form-group">
-                        <label for="first_name">Prénom et Nom de l'élève <span class="required">*</span></label>
-                        <div class="form-row">
-                            <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" placeholder="Prénom" required>
-                            <input type="text" id="last_name" name="last_name" value="{{ old('last_name') }}" placeholder="Nom" required>
-                        </div>
-                        @error('first_name')<span class="error">{{ $message }}</span>@enderror
-                        @error('last_name')<span class="error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="birth_date">Date et Lieu de naissance <span class="required">*</span></label>
-                        <div class="form-row">
-                            <input type="date" id="birth_date" name="birth_date" value="{{ old('birth_date') }}" required>
-                            <input type="text" id="birth_place" name="birth_place" value="{{ old('birth_place') }}" placeholder="Lieu de naissance" required>
-                        </div>
-                        @error('birth_date')<span class="error">{{ $message }}</span>@enderror
-                        @error('birth_place')<span class="error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="nationality">Nationalité <span class="required">*</span></label>
-                        <input type="text" id="nationality" name="nationality" value="{{ old('nationality') }}" required>
-                        @error('nationality')<span class="error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Langue parlée <span class="required">*</span></label>
-                        <div class="radio-group">
-                            <label class="radio-label">
-                                <input type="radio" name="spoken_language" value="Wolof" {{ old('spoken_language') == 'Wolof' ? 'checked' : '' }} required>
-                                <span>Wolof</span>
-                            </label>
-                            <label class="radio-label">
-                                <input type="radio" name="spoken_language" value="Poular" {{ old('spoken_language') == 'Poular' ? 'checked' : '' }}>
-                                <span>Poular</span>
-                            </label>
-                            <label class="radio-label">
-                                <input type="radio" name="spoken_language" value="Sérère" {{ old('spoken_language') == 'Sérère' ? 'checked' : '' }}>
-                                <span>Sérère</span>
-                            </label>
-                            <label class="radio-label">
-                                <input type="radio" name="spoken_language" value="Autres" {{ old('spoken_language') == 'Autres' ? 'checked' : '' }}>
-                                <span>Autres</span>
-                            </label>
-                        </div>
-                        @error('spoken_language')<span class="error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-
-                <div class="form-row" id="other_language_row" style="display: {{ old('spoken_language') == 'Autres' ? 'block' : 'none' }};">
-                    <div class="form-group">
-                        <label for="other_language">Préciser la langue</label>
-                        <input type="text" id="other_language" name="other_language" value="{{ old('other_language') }}" placeholder="Autre langue">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="level_id">Niveau de l'élève <span class="required">*</span></label>
-                        <select id="level_id" name="level_id" required>
+                        <label for="level_id" class="block text-sm font-semibold mb-2">Niveau de l'élève <span class="text-red-500">*</span></label>
+                        <select id="level_id" name="level_id" required class="w-full p-3 border rounded-xl focus:ring-2 focus:ring-primary/20">
                             <option value="">Sélectionner un niveau</option>
                             @foreach($levels as $level)
-                                <option value="{{ $level->id }}" {{ old('level_id') == $level->id ? 'selected' : '' }}>
+                                <option value="{{ $level->id }}" 
+                                    data-reg="{{ $level->registration_fee }}" 
+                                    data-month="{{ $level->monthly_fee }}"
+                                    data-reg-dp="{{ $level->half_pension_registration_fee }}"
+                                    data-month-dp="{{ $level->half_pension_monthly_fee }}"
+                                    {{ old('level_id') == $level->id ? 'selected' : '' }}>
                                     {{ $level->name }}
                                 </option>
                             @endforeach
                         </select>
-                        @error('level_id')<span class="error">{{ $message }}</span>@enderror
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
+                    <div class="form-group">
+                        <label for="first_name" class="block text-sm font-semibold mb-2">Prénom <span class="text-red-500">*</span></label>
+                        <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" required class="w-full p-3 border rounded-xl">
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name" class="block text-sm font-semibold mb-2">Nom <span class="text-red-500">*</span></label>
+                        <input type="text" id="last_name" name="last_name" value="{{ old('last_name') }}" required class="w-full p-3 border rounded-xl">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
+                    <div class="form-group">
+                        <label for="birth_date" class="block text-sm font-semibold mb-2">Date de naissance <span class="text-red-500">*</span></label>
+                        <input type="date" id="birth_date" name="birth_date" value="{{ old('birth_date') }}" required class="w-full p-3 border rounded-xl">
+                    </div>
+                    <div class="form-group">
+                        <label for="birth_place" class="block text-sm font-semibold mb-2">Lieu de naissance <span class="text-red-500">*</span></label>
+                        <input type="text" id="birth_place" name="birth_place" value="{{ old('birth_place') }}" required class="w-full p-3 border rounded-xl">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
+                    <div class="form-group">
+                        <label for="nationality" class="block text-sm font-semibold mb-2">Nationalité <span class="text-red-500">*</span></label>
+                        <input type="text" id="nationality" name="nationality" value="{{ old('nationality', 'Sénégalaise') }}" required class="w-full p-3 border rounded-xl">
+                    </div>
+                    <div class="form-group">
+                        <label class="block text-sm font-semibold mb-2">Langue parlée <span class="text-red-500">*</span></label>
+                        <select name="spoken_language" id="spoken_language" class="w-full p-3 border rounded-xl">
+                            <option value="Wolof" {{ old('spoken_language') == 'Wolof' ? 'selected' : '' }}>Wolof</option>
+                            <option value="Poular" {{ old('spoken_language') == 'Poular' ? 'selected' : '' }}>Poular</option>
+                            <option value="Sérère" {{ old('spoken_language') == 'Sérère' ? 'selected' : '' }}>Sérère</option>
+                            <option value="Autres" {{ old('spoken_language') == 'Autres' ? 'selected' : '' }}>Autres</option>
+                        </select>
                     </div>
                 </div>
             </div>
 
             <!-- Informations parentales -->
-            <div class="form-section">
-                <h2 class="section-title">Informations Parentales</h2>
+            <div class="form-section mb-12 pb-8 border-b border-gray-100">
+                <h2 class="text-xl font-serif font-bold mb-6 text-primary flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-sm">3</span>
+                    Informations Parentales
+                </h2>
 
-                <div class="form-row">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div class="form-group">
-                        <label for="father_name">Prénom et Nom du Père</label>
-                        <div class="form-row">
-                            <input type="text" id="father_name" name="father_name" value="{{ old('father_name') }}" placeholder="Nom du père">
-                            <input type="text" id="father_phone" name="father_phone" value="{{ old('father_phone') }}" placeholder="Tél" style="max-width: 200px;">
-                        </div>
-                        @error('father_name')<span class="error">{{ $message }}</span>@enderror
-                        @error('father_phone')<span class="error">{{ $message }}</span>@enderror
+                        <label for="father_name" class="block text-sm font-semibold mb-2">Prénom et Nom du Père</label>
+                        <input type="text" id="father_name" name="father_name" value="{{ old('father_name') }}" class="w-full p-3 border rounded-xl">
+                    </div>
+                    <div class="form-group">
+                        <label for="father_phone" class="block text-sm font-semibold mb-2">Tél Père</label>
+                        <input type="text" id="father_phone" name="father_phone" value="{{ old('father_phone') }}" class="w-full p-3 border rounded-xl">
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
                     <div class="form-group">
-                        <label for="mother_name">Prénom et Nom de la Mère</label>
-                        <div class="form-row">
-                            <input type="text" id="mother_name" name="mother_name" value="{{ old('mother_name') }}" placeholder="Nom de la mère">
-                            <input type="text" id="mother_phone" name="mother_phone" value="{{ old('mother_phone') }}" placeholder="Tél" style="max-width: 200px;">
-                        </div>
-                        @error('mother_name')<span class="error">{{ $message }}</span>@enderror
-                        @error('mother_phone')<span class="error">{{ $message }}</span>@enderror
+                        <label for="mother_name" class="block text-sm font-semibold mb-2">Prénom et Nom de la Mère</label>
+                        <input type="text" id="mother_name" name="mother_name" value="{{ old('mother_name') }}" class="w-full p-3 border rounded-xl">
+                    </div>
+                    <div class="form-group">
+                        <label for="mother_phone" class="block text-sm font-semibold mb-2">Tél Mère</label>
+                        <input type="text" id="mother_phone" name="mother_phone" value="{{ old('mother_phone') }}" class="w-full p-3 border rounded-xl">
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="parents_address">Adresse des parents</label>
-                        <div class="form-row">
-                            <input type="text" id="parents_address" name="parents_address" value="{{ old('parents_address') }}" placeholder="Adresse">
-                            <input type="text" id="villa_number" name="villa_number" value="{{ old('villa_number') }}" placeholder="Villa N°" style="max-width: 150px;">
-                        </div>
-                        @error('parents_address')<span class="error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="responsible_name">Responsable</label>
-                        <div class="form-row">
-                            <input type="text" id="responsible_name" name="responsible_name" value="{{ old('responsible_name') }}" placeholder="Nom du responsable">
-                            <input type="text" id="responsible_phone" name="responsible_phone" value="{{ old('responsible_phone') }}" placeholder="Tél" style="max-width: 200px;">
-                        </div>
-                        @error('responsible_name')<span class="error">{{ $message }}</span>@enderror
-                        @error('responsible_phone')<span class="error">{{ $message }}</span>@enderror
-                    </div>
+                <div class="form-group mt-6">
+                    <label for="parents_address" class="block text-sm font-semibold mb-2">Adresse / Villa N°</label>
+                    <input type="text" id="parents_address" name="parents_address" value="{{ old('parents_address') }}" class="w-full p-3 border rounded-xl" placeholder="Ex: Liberté 6, Villa 123">
                 </div>
             </div>
 
             <!-- Informations administratives -->
-            <div class="form-section">
-                <h2 class="section-title">Informations Administratives</h2>
+            <div class="form-section mb-12">
+                <h2 class="text-xl font-serif font-bold mb-6 text-primary flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-sm">4</span>
+                    Paiement & Inscription
+                </h2>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="entry_date">Date d'entrée <span class="required">*</span></label>
-                        <input type="date" id="entry_date" name="entry_date" value="{{ old('entry_date', date('Y-m-d')) }}" required>
-                        @error('entry_date')<span class="error">{{ $message }}</span>@enderror
+                <div id="fee-summary" class="bg-primary/5 p-6 rounded-2xl mb-8 hidden">
+                    <h3 class="font-bold text-primary mb-4 text-sm uppercase">Récapitulatif des frais estimés</h3>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-sm">Frais d'inscription :</span>
+                        <span id="reg-amount" class="font-bold">0 F</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-sm">Mensualité :</span>
+                        <span id="month-amount" class="font-bold">0 F</span>
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div class="form-group">
-                        <label for="first_monthly_paid">Sommes versées</label>
-                        <div class="form-row">
-                            <input type="number" id="first_monthly_paid" name="first_monthly_paid" value="{{ old('first_monthly_paid') }}" placeholder="Montant" min="0" step="0.01">
-                            <div class="radio-group" style="margin-left: 20px;">
-                                <label class="radio-label">
-                                    <input type="radio" name="first_monthly_included" value="1" {{ old('first_monthly_included', '0') == '1' ? 'checked' : '' }}>
-                                    <span>1er Mensualité y compris OUI</span>
-                                </label>
-                                <label class="radio-label">
-                                    <input type="radio" name="first_monthly_included" value="0" {{ old('first_monthly_included', '0') == '0' ? 'checked' : '' }}>
-                                    <span>NON</span>
-                                </label>
-                            </div>
-                        </div>
-                        @error('first_monthly_paid')<span class="error">{{ $message }}</span>@enderror
+                        <label for="entry_date" class="block text-sm font-semibold mb-2">Date d'entrée <span class="text-red-500">*</span></label>
+                        <input type="date" id="entry_date" name="entry_date" value="{{ old('entry_date', date('Y-m-d')) }}" required class="w-full p-3 border rounded-xl">
+                    </div>
+                    <div class="form-group">
+                        <label for="first_monthly_paid" class="block text-sm font-semibold mb-2">Montant versé à l'inscription (FCFA)</label>
+                        <input type="number" id="first_monthly_paid" name="first_monthly_paid" value="{{ old('first_monthly_paid') }}" class="w-full p-3 border rounded-xl" placeholder="Ex: 50000">
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="observations">Observation</label>
-                        <textarea id="observations" name="observations" rows="3" placeholder="Observations">{{ old('observations') }}</textarea>
-                        @error('observations')<span class="error">{{ $message }}</span>@enderror
+                <div class="form-group mt-6">
+                    <label class="block text-sm font-semibold mb-2">Inclure la 1ère mensualité dans ce montant ?</label>
+                    <div class="flex gap-4">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="first_monthly_included" value="1" {{ old('first_monthly_included', '1') == '1' ? 'checked' : '' }}>
+                            <span>Oui</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="first_monthly_included" value="0" {{ old('first_monthly_included', '1') == '0' ? 'checked' : '' }}>
+                            <span>Non</span>
+                        </label>
                     </div>
                 </div>
             </div>
 
-            @if($errors->any())
-                <div class="alert alert-error">
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Soumettre l'Inscription</button>
-                <a href="{{ route('admissions') }}" class="btn btn-secondary">Annuler</a>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mt-12">
+                <button type="submit" class="bg-primary text-white px-10 py-4 rounded-full font-bold hover:bg-primary-dark transition-all shadow-lg">
+                    Confirmer l'Inscription
+                </button>
+                <a href="{{ route('admissions') }}" class="text-center px-10 py-4 rounded-full font-bold border border-gray-200 hover:bg-gray-50 transition-all">
+                    Annuler
+                </a>
             </div>
         </form>
     </div>
 </section>
 
-<style>
-.registration-form {
-    max-width: 900px;
-    margin: 0 auto;
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.form-section {
-    margin-bottom: 2.5rem;
-    padding-bottom: 2rem;
-    border-bottom: 2px solid #e5e7eb;
-}
-
-.form-section:last-of-type {
-    border-bottom: none;
-}
-
-.section-title {
-    color: var(--primary);
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-    font-weight: 600;
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: var(--text-dark);
-}
-
-.required {
-    color: #ef4444;
-}
-
-.form-row {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-}
-
-.form-row input,
-.form-row select {
-    flex: 1;
-}
-
-input[type="text"],
-input[type="date"],
-input[type="number"],
-input[type="email"],
-select,
-textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #d1d5db;
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: border-color 0.2s;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(26, 77, 46, 0.1);
-}
-
-.checkbox-group,
-.radio-group {
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.checkbox-label,
-.radio-label {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-}
-
-.checkbox-label input[type="checkbox"],
-.radio-label input[type="radio"] {
-    width: auto;
-    cursor: pointer;
-}
-
-.error {
-    color: #ef4444;
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
-    display: block;
-}
-
-.alert-error {
-    background: #fee2e2;
-    color: #991b1b;
-    padding: 1rem;
-    border-radius: 4px;
-    margin-bottom: 1.5rem;
-}
-
-.alert-error ul {
-    margin: 0;
-    padding-left: 1.5rem;
-}
-
-.form-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 2rem;
-}
-
-.btn {
-    padding: 0.75rem 2rem;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.2s;
-}
-
-.btn-primary {
-    background: var(--primary);
-    color: white;
-}
-
-.btn-primary:hover {
-    background: #0f3d1f;
-}
-
-.btn-secondary {
-    background: #6b7280;
-    color: white;
-}
-
-.btn-secondary:hover {
-    background: #4b5563;
-}
-
-@media (max-width: 768px) {
-    .registration-form {
-        padding: 1rem;
-    }
-    
-    .form-row {
-        flex-direction: column;
-    }
-    
-    .checkbox-group,
-    .radio-group {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-}
-</style>
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const otherLanguageRadio = document.querySelector('input[value="Autres"]');
-    const otherLanguageRow = document.getElementById('other_language_row');
-    
-    document.querySelectorAll('input[name="spoken_language"]').forEach(radio => {
-        radio.addEventListener('change', function() {
-            if (this.value === 'Autres') {
-                otherLanguageRow.style.display = 'block';
-            } else {
-                otherLanguageRow.style.display = 'none';
-            }
-        });
-    });
+    const levelSelect = document.getElementById('level_id');
+    const isHalfPension = document.getElementById('is_half_pension');
+    const feeSummary = document.getElementById('fee-summary');
+    const regAmount = document.getElementById('reg-amount');
+    const monthAmount = document.getElementById('month-amount');
+
+    function updateFees() {
+        const selected = levelSelect.options[levelSelect.selectedIndex];
+        if (!selected || !selected.value) {
+            feeSummary.classList.add('hidden');
+            return;
+        }
+
+        feeSummary.classList.remove('hidden');
+        const isDP = isHalfPension.checked;
+        
+        const reg = isDP ? selected.dataset.regDp : selected.dataset.reg;
+        const month = isDP ? selected.dataset.monthDp : selected.dataset.month;
+
+        regAmount.textContent = new Intl.NumberFormat('fr-FR').format(reg) + ' F';
+        monthAmount.textContent = new Intl.NumberFormat('fr-FR').format(month) + ' F';
+    }
+
+    levelSelect.addEventListener('change', updateFees);
+    isHalfPension.addEventListener('change', updateFees);
+
+    // Trigger on load if there's an old value
+    if (levelSelect.value) updateFees();
 });
 </script>
 @endsection

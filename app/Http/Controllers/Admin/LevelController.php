@@ -10,7 +10,7 @@ class LevelController extends Controller
 {
     public function index()
     {
-        $levels = Level::latest()->paginate(15);
+        $levels = Level::orderBy('category')->orderBy('id')->paginate(15);
         return view('admin.levels.index', compact('levels'));
     }
 
@@ -24,8 +24,12 @@ class LevelController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'code' => 'required|string|max:10|unique:levels,code',
+            'category' => 'required|string|in:preschool,elementary,college',
             'description' => 'nullable|string',
+            'registration_fee' => 'required|numeric|min:0',
             'monthly_fee' => 'required|numeric|min:0',
+            'half_pension_registration_fee' => 'required|numeric|min:0',
+            'half_pension_monthly_fee' => 'required|numeric|min:0',
             'is_active' => 'boolean',
         ]);
 
@@ -47,8 +51,12 @@ class LevelController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'code' => 'required|string|max:10|unique:levels,code,' . $level->id,
+            'category' => 'required|string|in:preschool,elementary,college',
             'description' => 'nullable|string',
+            'registration_fee' => 'required|numeric|min:0',
             'monthly_fee' => 'required|numeric|min:0',
+            'half_pension_registration_fee' => 'required|numeric|min:0',
+            'half_pension_monthly_fee' => 'required|numeric|min:0',
             'is_active' => 'boolean',
         ]);
 

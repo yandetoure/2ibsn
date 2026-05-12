@@ -12,7 +12,7 @@ class RegistrationController extends Controller
 {
     public function showForm()
     {
-        $levels = Level::where('is_active', true)->get();
+        $levels = Level::where('is_active', true)->orderBy('category')->orderBy('id')->get();
         return view('registration', compact('levels'));
     }
 
@@ -30,6 +30,7 @@ class RegistrationController extends Controller
             'level_id' => 'required|exists:levels,id',
             'is_boarding' => 'boolean',
             'is_day_student' => 'boolean',
+            'is_half_pension' => 'boolean',
             'is_holiday' => 'boolean',
             'is_preschool' => 'boolean',
             'father_name' => 'nullable|string|max:255',
@@ -60,6 +61,7 @@ class RegistrationController extends Controller
                 'level_id' => $validated['level_id'],
                 'is_boarding' => $request->has('is_boarding'),
                 'is_day_student' => $request->has('is_day_student'),
+                'is_half_pension' => $request->has('is_half_pension'),
                 'is_holiday' => $request->has('is_holiday'),
                 'is_preschool' => $request->has('is_preschool'),
                 'father_name' => $validated['father_name'] ?? null,
@@ -78,7 +80,21 @@ class RegistrationController extends Controller
             $level = Level::find($validated['level_id']);
             $firstMonthlyPaid = $validated['first_monthly_paid'] ?? 0;
             $firstMonthlyIncluded = $request->has('first_monthly_included');
-            $monthlyFee = $level->monthly_fee;
+            
+            // Logic for fees based on pension type
+            if ($student->is_half_pension) {
+                $monthlyFee = $level->half_pension_monthly_fee;
+                $registrationFee = $level->half_pension_registration_fee;
+            } else {
+                $monthlyFee = $level->monthly_fee;
+                $registrationFee = $level->registration_fee;
+            }
+
+            // Total due initially
+            $totalDue = $registrationFee;
+            if ($firstMonthlyIncluded) {
+                $totalDue += $monthlyFee;
+            }
 
             $enrollment = Enrollment::create([
                 'student_id' => $student->id,
@@ -88,7 +104,8 @@ class RegistrationController extends Controller
                 'first_monthly_included' => $firstMonthlyIncluded,
                 'total_paid' => $firstMonthlyPaid,
                 'monthly_fee' => $monthlyFee,
-                'remaining_amount' => max(0, $monthlyFee - $firstMonthlyPaid),
+                'registration_fee' => $registrationFee,
+                'remaining_amount' => max(0, $totalDue - $firstMonthlyPaid),
                 'status' => 'active',
             ]);
 
@@ -98,7 +115,7 @@ class RegistrationController extends Controller
                 ->with('success', 'Inscription réussie !');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->withInput()->withErrors(['error' => 'Une erreur est survenue lors de l\'inscription.']);
+            return back()->withInput()->withErrors(['error' => 'Une erreur est survenue lors de l\'inscription: ' . $e->getMessage()]);
         }
     }
 

@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Level;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class LevelSeeder extends Seeder
 {
@@ -15,33 +15,92 @@ class LevelSeeder extends Seeder
     {
         $levels = [
             // Préscolaire
-            ['name' => 'Petite Section', 'code' => 'PS', 'monthly_fee' => 12000, 'description' => 'Petite Section - Préscolaire'],
-            ['name' => 'Moyenne Section', 'code' => 'MS', 'monthly_fee' => 12000, 'description' => 'Moyenne Section - Préscolaire'],
-            ['name' => 'Grande Section', 'code' => 'GS', 'monthly_fee' => 12000, 'description' => 'Grande Section - Préscolaire'],
+            [
+                'name' => 'Petite Section', 'code' => 'PS', 'category' => 'preschool',
+                'registration_fee' => 24000, 'monthly_fee' => 12000,
+                'half_pension_registration_fee' => 24000, 'half_pension_monthly_fee' => 20000,
+                'description' => 'Petite Section - Préscolaire'
+            ],
+            [
+                'name' => 'Moyenne Section', 'code' => 'MS', 'category' => 'preschool',
+                'registration_fee' => 24000, 'monthly_fee' => 12000,
+                'half_pension_registration_fee' => 24000, 'half_pension_monthly_fee' => 20000,
+                'description' => 'Moyenne Section - Préscolaire'
+            ],
+            [
+                'name' => 'Grande Section', 'code' => 'GS', 'category' => 'preschool',
+                'registration_fee' => 24000, 'monthly_fee' => 12000,
+                'half_pension_registration_fee' => 24000, 'half_pension_monthly_fee' => 20000,
+                'description' => 'Grande Section - Préscolaire'
+            ],
             
             // Élémentaire
-            ['name' => 'CI', 'code' => 'CI', 'monthly_fee' => 12000, 'description' => 'Cours d\'Initiation'],
-            ['name' => 'CP', 'code' => 'CP', 'monthly_fee' => 12000, 'description' => 'Cours Préparatoire'],
-            ['name' => 'CE1', 'code' => 'CE1', 'monthly_fee' => 12000, 'description' => 'Cours Élémentaire 1ère année'],
-            ['name' => 'CE2', 'code' => 'CE2', 'monthly_fee' => 12000, 'description' => 'Cours Élémentaire 2ème année'],
-            ['name' => 'CM1', 'code' => 'CM1', 'monthly_fee' => 12000, 'description' => 'Cours Moyen 1ère année'],
-            ['name' => 'CM2', 'code' => 'CM2', 'monthly_fee' => 12000, 'description' => 'Cours Moyen 2ème année'],
+            [
+                'name' => 'CI', 'code' => 'CI', 'category' => 'elementary',
+                'registration_fee' => 25000, 'monthly_fee' => 12000,
+                'half_pension_registration_fee' => 25000, 'half_pension_monthly_fee' => 25000,
+                'description' => 'Cours d\'Initiation'
+            ],
+            [
+                'name' => 'CP', 'code' => 'CP', 'category' => 'elementary',
+                'registration_fee' => 25000, 'monthly_fee' => 12000,
+                'half_pension_registration_fee' => 25000, 'half_pension_monthly_fee' => 25000,
+                'description' => 'Cours Préparatoire'
+            ],
+            [
+                'name' => 'CE1', 'code' => 'CE1', 'category' => 'elementary',
+                'registration_fee' => 25000, 'monthly_fee' => 12000,
+                'half_pension_registration_fee' => 29000, 'half_pension_monthly_fee' => 29000,
+                'description' => 'Cours Élémentaire 1ère année'
+            ],
+            [
+                'name' => 'CE2', 'code' => 'CE2', 'category' => 'elementary',
+                'registration_fee' => 25000, 'monthly_fee' => 12000,
+                'half_pension_registration_fee' => 29000, 'half_pension_monthly_fee' => 29000,
+                'description' => 'Cours Élémentaire 2ème année'
+            ],
+            [
+                'name' => 'CM1', 'code' => 'CM1', 'category' => 'elementary',
+                'registration_fee' => 25000, 'monthly_fee' => 12000,
+                'half_pension_registration_fee' => 33000, 'half_pension_monthly_fee' => 33000,
+                'description' => 'Cours Moyen 1ère année'
+            ],
+            [
+                'name' => 'CM2', 'code' => 'CM2', 'category' => 'elementary',
+                'registration_fee' => 25000, 'monthly_fee' => 12000,
+                'half_pension_registration_fee' => 33000, 'half_pension_monthly_fee' => 33000,
+                'description' => 'Cours Moyen 2ème année'
+            ],
             
-            // Secondaire
-            ['name' => '6ème', 'code' => '6EME', 'monthly_fee' => 17000, 'description' => '6ème année'],
-            ['name' => '5ème', 'code' => '5EME', 'monthly_fee' => 17000, 'description' => '5ème année'],
-            ['name' => '4ème', 'code' => '4EME', 'monthly_fee' => 19000, 'description' => '4ème année'],
-            ['name' => '3ème', 'code' => '3EME', 'monthly_fee' => 25000, 'description' => '3ème année'],
+            // Collège
+            [
+                'name' => '6ème', 'code' => '6EME', 'category' => 'college',
+                'registration_fee' => 34000, 'monthly_fee' => 17000,
+                'half_pension_registration_fee' => 0, 'half_pension_monthly_fee' => 0,
+                'description' => '6ème année du Collège'
+            ],
+            [
+                'name' => '5ème', 'code' => '5EME', 'category' => 'college',
+                'registration_fee' => 34000, 'monthly_fee' => 17000,
+                'half_pension_registration_fee' => 0, 'half_pension_monthly_fee' => 0,
+                'description' => '5ème année du Collège'
+            ],
+            [
+                'name' => '4ème', 'code' => '4EME', 'category' => 'college',
+                'registration_fee' => 44000, 'monthly_fee' => 19000,
+                'half_pension_registration_fee' => 0, 'half_pension_monthly_fee' => 0,
+                'description' => '4ème année du Collège'
+            ],
+            [
+                'name' => '3ème', 'code' => '3EME', 'category' => 'college',
+                'registration_fee' => 50000, 'monthly_fee' => 25000,
+                'half_pension_registration_fee' => 0, 'half_pension_monthly_fee' => 0,
+                'description' => '3ème année du Collège'
+            ],
         ];
 
         foreach ($levels as $level) {
-            Level::create([
-                'name' => $level['name'],
-                'code' => $level['code'],
-                'monthly_fee' => $level['monthly_fee'],
-                'description' => $level['description'],
-                'is_active' => true,
-            ]);
+            Level::updateOrCreate(['code' => $level['code']], $level);
         }
     }
 }
