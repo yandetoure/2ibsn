@@ -1,116 +1,156 @@
 @extends('admin.layout')
 
-@section('title', 'Dashboard Admin - 2IBSN')
-@section('page-title', 'Dashboard')
+@section('title', 'Dashboard - 2IBSN Admin')
+@section('page-title', 'Tableau de Bord')
 
 @section('content')
-<div class="stats-grid">
-    <div class="stat-card">
-        <h3>Total Élèves</h3>
-        <div class="value">{{ $stats['total_students'] }}</div>
+<div class="stats-overview" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem;">
+    <!-- Stat Card 1 -->
+    <div class="stat-card-premium" style="background: white; padding: 1.5rem; border-radius: 20px; box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05); display: flex; align-items: center; gap: 20px;">
+        <div class="stat-icon" style="width: 56px; height: 56px; border-radius: 16px; background: rgba(26, 77, 46, 0.1); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+            <i class="fas fa-user-graduate"></i>
+        </div>
+        <div class="stat-details">
+            <span style="display: block; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">Total Élèves</span>
+            <span style="display: block; font-size: 1.75rem; font-weight: 700; color: var(--primary);">{{ $stats['total_students'] }}</span>
+        </div>
     </div>
-    <div class="stat-card">
-        <h3>Élèves Actifs</h3>
-        <div class="value">{{ $stats['active_students'] }}</div>
+
+    <!-- Stat Card 2 -->
+    <div class="stat-card-premium" style="background: white; padding: 1.5rem; border-radius: 20px; box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05); display: flex; align-items: center; gap: 20px;">
+        <div class="stat-icon" style="width: 56px; height: 56px; border-radius: 16px; background: rgba(16, 185, 129, 0.1); color: #10b981; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="stat-details">
+            <span style="display: block; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">Élèves Actifs</span>
+            <span style="display: block; font-size: 1.75rem; font-weight: 700; color: #10b981;">{{ $stats['active_students'] }}</span>
+        </div>
     </div>
-    <div class="stat-card">
-        <h3>Inscriptions Actives</h3>
-        <div class="value">{{ $stats['total_enrollments'] }}</div>
+
+    <!-- Stat Card 3 -->
+    <div class="stat-card-premium" style="background: white; padding: 1.5rem; border-radius: 20px; box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05); display: flex; align-items: center; gap: 20px;">
+        <div class="stat-icon" style="width: 56px; height: 56px; border-radius: 16px; background: rgba(212, 175, 55, 0.1); color: var(--secondary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+            <i class="fas fa-wallet"></i>
+        </div>
+        <div class="stat-details">
+            <span style="display: block; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">Recettes Totales</span>
+            <span style="display: block; font-size: 1.75rem; font-weight: 700; color: var(--text-main);">{{ number_format($stats['total_payments'], 0, ',', ' ') }} F</span>
+        </div>
     </div>
-    <div class="stat-card">
-        <h3>Total Paiements</h3>
-        <div class="value">{{ number_format($stats['total_payments'], 0, ',', ' ') }} F</div>
-    </div>
-    <div class="stat-card">
-        <h3>Paiements en Attente</h3>
-        <div class="value">{{ $stats['pending_payments'] }}</div>
-    </div>
-    <div class="stat-card">
-        <h3>Niveaux Actifs</h3>
-        <div class="value">{{ $stats['total_levels'] }}</div>
+
+    <!-- Stat Card 4 -->
+    <div class="stat-card-premium" style="background: white; padding: 1.5rem; border-radius: 20px; box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05); display: flex; align-items: center; gap: 20px;">
+        <div class="stat-icon" style="width: 56px; height: 56px; border-radius: 16px; background: rgba(239, 68, 68, 0.1); color: #ef4444; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+            <i class="fas fa-clock"></i>
+        </div>
+        <div class="stat-details">
+            <span style="display: block; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">Attente Paiement</span>
+            <span style="display: block; font-size: 1.75rem; font-weight: 700; color: #ef4444;">{{ $stats['pending_payments'] }}</span>
+        </div>
     </div>
 </div>
 
-<div class="card">
-    <h2 style="margin-bottom: 1rem;">Élèves Récents</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Niveau</th>
-                <th>Date d'entrée</th>
-                <th>Statut</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($recent_students as $student)
-                <tr>
-                    <td>{{ $student->full_name }}</td>
-                    <td>{{ $student->level->name ?? 'N/A' }}</td>
-                    <td>{{ $student->entry_date->format('d/m/Y') }}</td>
-                    <td>
-                        <span style="padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.875rem; 
-                            background: {{ $student->status == 'active' ? '#d1fae5' : '#fee2e2' }};
-                            color: {{ $student->status == 'active' ? '#065f46' : '#991b1b' }};">
-                            {{ ucfirst($student->status) }}
-                        </span>
-                    </td>
-                    <td>
-                        <a href="{{ route('admin.students.show', $student) }}" class="btn btn-primary" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">Voir</a>
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="5" style="text-align: center; color: #6b7280;">Aucun élève enregistré</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+<div class="dashboard-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+    <!-- Recent Students Table -->
+    <div class="card" style="padding: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h2 style="font-size: 1.15rem; font-weight: 700; color: var(--primary);">Inscriptions Récentes</h2>
+            <a href="{{ route('admin.students.index') }}" style="font-size: 0.85rem; font-weight: 600; color: var(--secondary); text-decoration: none;">Voir tout</a>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Élève</th>
+                        <th>Niveau</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($recent_students as $student)
+                        <tr>
+                            <td>
+                                <div style="font-weight: 600;">{{ $student->full_name }}</div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">Inscrit le {{ $student->created_at->format('d/m/Y') }}</div>
+                            </td>
+                            <td><span style="font-size: 0.85rem; padding: 4px 8px; background: #f1f5f9; border-radius: 4px;">{{ $student->level->name ?? 'N/A' }}</span></td>
+                            <td>
+                                <span style="padding: 0.35rem 0.75rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+                                    background: {{ $student->status == 'active' ? '#dcfce7' : '#fee2e2' }};
+                                    color: {{ $student->status == 'active' ? '#166534' : '#991b1b' }};">
+                                    {{ $student->status == 'active' ? 'Actif' : 'Inactif' }}
+                                </span>
+                            </td>
+                            <td>
+                                <a href="{{ route('admin.students.show', $student) }}" class="btn-secondary" style="padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; text-decoration: none;">Gérer</a>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4" style="text-align: center; padding: 2rem; color: var(--text-muted);">Aucun élève récemment inscrit.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Recent Payments Table -->
+    <div class="card" style="padding: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h2 style="font-size: 1.15rem; font-weight: 700; color: var(--primary);">Derniers Paiements</h2>
+            <a href="{{ route('admin.payments.index') }}" style="font-size: 0.85rem; font-weight: 600; color: var(--secondary); text-decoration: none;">Voir tout</a>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Élève</th>
+                        <th>Montant</th>
+                        <th>Type</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($recent_payments as $payment)
+                        <tr>
+                            <td>
+                                <div style="font-weight: 600;">{{ $payment->student->full_name }}</div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">{{ $payment->payment_date->format('d/m/Y') }}</div>
+                            </td>
+                            <td><span style="font-weight: 700; color: var(--primary);">{{ number_format($payment->amount, 0, ',', ' ') }} F</span></td>
+                            <td>
+                                <span style="font-size: 0.8rem; color: var(--text-muted);">
+                                    @if($payment->type == 'first_monthly') 1ère Mens.
+                                    @elseif($payment->type == 'monthly') Mensualité
+                                    @else Autre
+                                    @endif
+                                </span>
+                            </td>
+                            <td>
+                                <a href="{{ route('admin.payments.show', $payment) }}" class="btn-secondary" style="padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; text-decoration: none;">Recu</a>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4" style="text-align: center; padding: 2rem; color: var(--text-muted);">Aucun paiement enregistré.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
-<div class="card">
-    <h2 style="margin-bottom: 1rem;">Paiements Récents</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Élève</th>
-                <th>Montant</th>
-                <th>Type</th>
-                <th>Date</th>
-                <th>Statut</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($recent_payments as $payment)
-                <tr>
-                    <td>{{ $payment->student->full_name }}</td>
-                    <td>{{ number_format($payment->amount, 0, ',', ' ') }} F</td>
-                    <td>
-                        @if($payment->type == 'first_monthly') 1ère Mensualité
-                        @elseif($payment->type == 'monthly') Mensualité
-                        @else Autre
-                        @endif
-                    </td>
-                    <td>{{ $payment->payment_date->format('d/m/Y') }}</td>
-                    <td>
-                        <span style="padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.875rem; 
-                            background: {{ $payment->status == 'completed' ? '#d1fae5' : '#fee2e2' }};
-                            color: {{ $payment->status == 'completed' ? '#065f46' : '#991b1b' }};">
-                            {{ ucfirst($payment->status) }}
-                        </span>
-                    </td>
-                    <td>
-                        <a href="{{ route('admin.payments.show', $payment) }}" class="btn btn-primary" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">Voir</a>
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="6" style="text-align: center; color: #6b7280;">Aucun paiement enregistré</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
+@endsection
+
+@section('styles')
+<style>
+    @media (max-width: 1024px) {
+        .dashboard-grid {
+            grid-template-columns: 1fr !important;
+        }
+    }
+</style>
 @endsection
