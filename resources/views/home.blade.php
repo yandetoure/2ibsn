@@ -100,13 +100,13 @@
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-[10] flex gap-2">
         @for($i=0;$i<4;$i++)
         <button class="carousel-indicator h-1 rounded-full bg-white/30 transition-all duration-500 {{ $i===0 ? '!bg-secondary !w-6' : 'w-4' }}"
-                aria-label="Slide {{ $i+1 }}"></button>
+                aria-label="Diapositive {{ $i+1 }}"></button>
         @endfor
     </div>
 
     {{-- Scroll cue --}}
     <div class="absolute bottom-8 right-8 z-[10] hidden lg:flex flex-col items-center gap-2">
-        <span class="text-white/40 text-[9px] uppercase tracking-[3px] rotate-90 origin-center mb-4">Scroll</span>
+        <span class="text-white/40 text-[9px] uppercase tracking-[3px] rotate-90 origin-center mb-4">Défiler</span>
         <div class="w-px h-12 bg-gradient-to-b from-white/40 to-transparent"></div>
     </div>
 </section>
