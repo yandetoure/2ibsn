@@ -78,6 +78,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('/appearance/colors/reset', [AppearanceController::class, 'resetColors'])->name('appearance.colors.reset');
     Route::get('/appearance/gallery', [AppearanceController::class, 'gallery'])->name('appearance.gallery');
     
+    // Routes Événements
+    Route::get('/appearance/events', [AppearanceController::class, 'events'])->name('appearance.events');
+    Route::post('/appearance/events/toggle', [AppearanceController::class, 'toggleEventsSection'])->name('appearance.events.toggle');
+    
     // Routes années scolaires
     Route::resource('school-years', SchoolYearController::class);
     

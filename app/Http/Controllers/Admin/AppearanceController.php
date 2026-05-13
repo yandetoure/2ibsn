@@ -83,4 +83,17 @@ class AppearanceController extends Controller
         $media = Media::where('type', 'gallery')->orderBy('order')->orderBy('created_at', 'desc')->paginate(24);
         return view('admin.appearance.gallery', compact('media'));
     }
+
+    public function events()
+    {
+        $events = Media::where('type', 'event')->orderBy('order')->orderBy('created_at', 'desc')->paginate(12);
+        $show_events = Setting::get('show_events_section', false);
+        return view('admin.appearance.events', compact('events', 'show_events'));
+    }
+
+    public function toggleEventsSection(Request $request)
+    {
+        Setting::set('show_events_section', $request->has('show_events_section') ? '1' : '0', 'boolean', 'appearance');
+        return redirect()->back()->with('success', 'Visibilité de la section événements mise à jour.');
+    }
 }

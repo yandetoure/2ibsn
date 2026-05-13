@@ -18,7 +18,7 @@ class MediaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'type' => 'required|in:banner,gallery,logo,other',
+            'type' => 'required|in:banner,gallery,logo,other,event',
             'title' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'order' => 'nullable|integer|min:0',
@@ -50,6 +50,21 @@ class MediaController extends Controller
             return redirect()->back()->with('success', $message);
         }
 
+        if ($request->filled('youtube_url') && $request->type === 'event') {
+            Media::create([
+                'type' => $request->type,
+                'title' => $request->title,
+                'description' => $request->description,
+                'file_path' => $request->youtube_url,
+                'file_name' => 'YouTube Video',
+                'mime_type' => 'video/youtube',
+                'file_size' => 0,
+                'order' => $request->order ?? 0,
+                'is_active' => true,
+            ]);
+            return redirect()->route('admin.appearance.events')->with('success', 'Lien YouTube ajouté avec succès.');
+        }
+
         // Fallback for single file (if any old forms exist)
         if ($request->hasFile('file')) {
             $file = $request->file('file');
@@ -79,7 +94,7 @@ class MediaController extends Controller
     public function update(Request $request, Media $medium)
     {
         $validated = $request->validate([
-            'type' => 'required|in:banner,gallery,logo,other',
+            'type' => 'required|in:banner,gallery,logo,other,event',
             'title' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'file' => 'nullable|image|max:10240',
@@ -100,6 +115,13 @@ class MediaController extends Controller
                 'file_name' => $file->getClientOriginalName(),
                 'mime_type' => $file->getMimeType(),
                 'file_size' => $file->getSize(),
+            ]);
+        }
+
+        if ($request->filled('youtube_url') && $medium->type === 'event') {
+            $medium->update([
+                'file_path' => $request->youtube_url,
+                'mime_type' => 'video/youtube',
             ]);
         }
 
@@ -139,6 +161,8 @@ class MediaController extends Controller
             return redirect()->route('admin.appearance.hero')->with('success', $message);
         } elseif ($medium->type === 'gallery') {
             return redirect()->route('admin.appearance.gallery')->with('success', $message);
+        } elseif ($medium->type === 'event') {
+            return redirect()->route('admin.appearance.events')->with('success', $message);
         }
 
         return redirect()->back()->with('success', $message);

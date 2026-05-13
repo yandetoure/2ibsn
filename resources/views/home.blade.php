@@ -382,8 +382,83 @@
 
 
 {{-- ═══════════════════════════════════════════════════════
-     GALLERY
+     EVENTS SECTION
 ══════════════════════════════════════════════════════════ --}}
+@if(App\Models\Setting::get('show_events_section', false))
+<section class="py-24 bg-white overflow-hidden">
+    <div class="container">
+        <div class="text-center mb-16" data-animate="fade-up">
+            <span class="section-label">Événements</span>
+            <h2 class="section-title">Actualités & <span class="text-secondary">Événements</span></h2>
+            <div class="section-divider mx-auto"></div>
+            <p class="mt-4 text-gray-500 max-w-xl mx-auto leading-relaxed">
+                Découvrez les moments forts de la vie à l'institut, nos sorties pédagogiques et nos cérémonies.
+            </p>
+        </div>
+
+        @php
+            $eventsMedia = \App\Models\Media::where('type', 'event')->where('is_active', true)->orderBy('order')->orderBy('created_at', 'desc')->get();
+        @endphp
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @foreach($eventsMedia as $i => $event)
+                <div class="group bg-[#f8fafc] rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100"
+                     data-animate="fade-up" style="transition-delay: {{ $i * 100 }}ms">
+                    
+                    {{-- Media Container --}}
+                    <div class="relative aspect-video overflow-hidden">
+                        @if($event->mime_type === 'video/youtube')
+                            @php
+                                preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $event->file_path, $match);
+                                $youtube_id = $match[1] ?? null;
+                            @endphp
+                            @if($youtube_id)
+                                <iframe class="w-full h-full" src="https://www.youtube.com/embed/{{ $youtube_id }}" title="{{ $event->title }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            @endif
+                        @elseif(str_starts_with($event->mime_type, 'video/'))
+                            <video class="w-full h-full object-cover" controls>
+                                <source src="{{ asset('storage/' . $event->file_path) }}" type="{{ $event->mime_type }}">
+                                Votre navigateur ne supporte pas la lecture de vidéos.
+                            </video>
+                        @else
+                            <img src="{{ asset('storage/' . $event->file_path) }}" 
+                                 alt="{{ $event->title }}"
+                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        @endif
+                        
+                        {{-- Type Badge --}}
+                        <div class="absolute top-4 right-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-bold uppercase tracking-wider text-primary shadow-sm z-10">
+                            @if($event->mime_type === 'video/youtube')
+                                <i class="fab fa-youtube mr-1 text-red-600"></i> Vidéo
+                            @elseif(str_starts_with($event->mime_type, 'video/'))
+                                <i class="fas fa-play mr-1"></i> Vidéo
+                            @else
+                                <i class="fas fa-image mr-1"></i> Image
+                            @endif
+                        </div>
+                    </div>
+
+                    {{-- Content --}}
+                    <div class="p-8">
+                        <h3 class="font-serif font-bold text-xl text-gray-900 mb-3 group-hover:text-primary transition-colors">
+                            {{ $event->title }}
+                        </h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-6">
+                            {{ $event->description }}
+                        </p>
+                        
+                        <div class="flex items-center gap-2 text-[11px] font-bold text-secondary uppercase tracking-widest">
+                            <span class="w-8 h-px bg-secondary/30"></span>
+                            {{ $event->created_at->translatedFormat('d M Y') }}
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+
 <section class="py-24 bg-[#f7f5f0]">
     <div class="container">
 

@@ -427,6 +427,10 @@
                 <i class="fas fa-images"></i>
                 Galerie
             </a>
+            <a href="{{ route('admin.appearance.events') }}" class="nav-item {{ request()->routeIs('admin.appearance.events') ? 'active' : '' }}">
+                <i class="fas fa-calendar-check"></i>
+                Événements
+            </a>
 
             <div style="margin-top: 2rem; padding: 0 1rem;">
                 <a href="{{ route('home') }}" target="_blank" class="nav-item" style="background: rgba(255,255,255,0.05);">
